@@ -29,6 +29,7 @@ public class Account implements Serializable {
     protected String firstName;
     protected String lastName;
     protected Date creationDate;
+    protected String image;
     
 
     public Account() {
@@ -118,7 +119,16 @@ public class Account implements Serializable {
     public void setDateCreation(Date creationDate) {
         this.creationDate = creationDate;
     }
- 
+    
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     @Transient
     public String getRoles(){
         return ROLE;

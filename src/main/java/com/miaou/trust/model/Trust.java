@@ -1,12 +1,17 @@
 package com.miaou.trust.model;
 
+import com.miaou.users.model.AccountTrust;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +28,10 @@ public class Trust implements Serializable {
     private String legalInfomation;
     private Date creationDate;
     private String description;
+    private String image;
+    
+    private Set<AccountTrust> accountTrusts = new HashSet<AccountTrust>();
+    private Set<CoOwnership> coOwnerships = new HashSet<CoOwnership>();
 
     public Trust() {
         creationDate = new Date();
@@ -38,12 +47,10 @@ public class Trust implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getID() {
         return this.id;
-
     }
 
     public void setID(int id) {
         this.id = id;
-
     }
 
     @Column(name = "name", unique = true, nullable = false)
@@ -126,5 +133,33 @@ public class Trust implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "trust")
+    public Set<AccountTrust> getAccountTrusts() {
+        return accountTrusts;
+    }
+
+    public void setAccountTrusts(Set<AccountTrust> accountTrusts) {
+        this.accountTrusts = accountTrusts;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "trust")
+    public Set<CoOwnership> getCoOwnerships() {
+        return coOwnerships;
+    }
+
+    public void setCoOwnerships(Set<CoOwnership> coOwnerships) {
+        this.coOwnerships = coOwnerships;
+    }
+
 
 }
