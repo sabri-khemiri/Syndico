@@ -1,7 +1,6 @@
 package com.miaou.users.model;
 
 import com.miaou.trust.model.CoOwnership;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

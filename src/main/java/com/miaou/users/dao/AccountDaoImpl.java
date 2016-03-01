@@ -25,22 +25,30 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     @Transactional
     public Account findByUsername(String username) {
-
         List<Account> accounts = new ArrayList<Account>();
-
         accounts = sessionFactory.getCurrentSession().createQuery("from Account where username=?").setParameter(0, username).list();
-
         if (accounts.size() > 0) {
             return accounts.get(0);
         } else {
             return null;
         }
-
     }
 
     @Override
     @Transactional
     public void addAccount(Account account) {
         sessionFactory.getCurrentSession().persist(account);
+    }
+    
+    @Override
+    @Transactional
+    public void removeAccount(Account account) {
+        sessionFactory.getCurrentSession().delete(account);
+    }
+    
+    @Override
+    @Transactional
+    public void updateAccount(Account account) {
+        sessionFactory.getCurrentSession().saveOrUpdate(account);
     }
 }

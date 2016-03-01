@@ -151,6 +151,14 @@ public class Trust implements Serializable {
     public void setAccountTrusts(Set<AccountTrust> accountTrusts) {
         this.accountTrusts = accountTrusts;
     }
+    
+    public void addAccountTrust(AccountTrust a) {
+        this.accountTrusts.add(a);
+    }
+    
+    public void removeAccountTrusts(AccountTrust a) {
+        this.accountTrusts.remove(a);
+    }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "trust")
     public Set<CoOwnership> getCoOwnerships() {
@@ -161,5 +169,12 @@ public class Trust implements Serializable {
         this.coOwnerships = coOwnerships;
     }
 
+    public void addCoOwnership(CoOwnership c) {
+        this.coOwnerships.add(c);
+    }
+    
+    public void removeCoOwnership(CoOwnership c) {
+        this.coOwnerships.remove(c);
+    }
 
 }

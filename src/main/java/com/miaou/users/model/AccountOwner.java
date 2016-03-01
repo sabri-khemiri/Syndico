@@ -17,6 +17,7 @@ public class AccountOwner extends Account {
     protected static final String ROLE = "ROLE_OWNER";
     
     private String flatNumber;
+    
     private CoOwnership coOwnership;
     
     public AccountOwner(){

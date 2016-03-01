@@ -112,6 +112,10 @@ public class CoOwnership implements Serializable {
     public void addOwner(AccountOwner a) {
         this.owners.add(a);
     }
+    
+    public void removeOwner(AccountOwner a) {
+        this.owners.remove(a);
+    }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "coOwnership")
     public Set<AccountManager> getManagers() {
@@ -126,4 +130,7 @@ public class CoOwnership implements Serializable {
         this.managers.add(a);
     }
 
+    public void removeManager(AccountManager a) {
+        this.managers.remove(a);
+    }
 }

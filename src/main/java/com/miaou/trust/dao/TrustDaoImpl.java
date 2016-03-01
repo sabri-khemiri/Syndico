@@ -24,30 +24,37 @@ public class TrustDaoImpl implements TrustDao {
 
     @Override
     @Transactional
+    public List<Trust> getAll() {       
+        return sessionFactory.getCurrentSession().createQuery("from Trust").list();
+    }
+    
+    @Override
+    @Transactional
     public Trust getByName(String name) {
-
         List<Trust> trusts = new ArrayList<Trust>();
-
         trusts = sessionFactory.getCurrentSession().createQuery("from Trust where name=?").setParameter(0, name).list();
-
         if (trusts.size() > 0) {
             return trusts.get(0);
         } else {
             return null;
         }
-
     }
-
+    
     @Override
     @Transactional
-    public void add(Trust trust) {
+    public void addTrust(Trust trust) {
         sessionFactory.getCurrentSession().persist(trust);
     }
 
     @Override
     @Transactional
-    public List<Trust> getAll() {       
-        return sessionFactory.getCurrentSession().createQuery("from Trust").list();
-         
+    public void removeTrust(Trust trust) {
+        sessionFactory.getCurrentSession().delete(trust);
+    }
+    
+    @Override
+    @Transactional
+    public void updateTrust(Trust trust) {
+        sessionFactory.getCurrentSession().saveOrUpdate(trust);
     }
 }

@@ -6,5 +6,7 @@ import java.util.List;
 public interface TrustDao {
     public List<Trust> getAll();
     public Trust getByName(String name);
-    public void add(Trust trust);
+    public void addTrust(Trust trust);
+    public void removeTrust(Trust trust);
+    public void updateTrust(Trust trust);
 }

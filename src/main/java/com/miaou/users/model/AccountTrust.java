@@ -1,8 +1,6 @@
 package com.miaou.users.model;
 
 import com.miaou.trust.model.Trust;
-import java.util.ArrayList;
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
