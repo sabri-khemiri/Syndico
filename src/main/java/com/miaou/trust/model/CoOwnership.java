@@ -1,5 +1,6 @@
 package com.miaou.trust.model;
 
+import com.miaou.meeting.model.Meeting;
 import com.miaou.users.model.AccountManager;
 import com.miaou.users.model.AccountOwner;
 import java.io.Serializable;
@@ -30,6 +31,7 @@ public class CoOwnership implements Serializable {
     private Trust trust;
     private Set<AccountOwner> owners = new HashSet<AccountOwner>();
     private Set<AccountManager> managers = new HashSet<AccountManager>();
+    private Set<Meeting> meetings = new HashSet<Meeting>();
 
     public CoOwnership() {
         creationDate = new Date();
@@ -133,4 +135,24 @@ public class CoOwnership implements Serializable {
     public void removeManager(AccountManager a) {
         this.managers.remove(a);
     }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "meeting_id")
+    public Set<Meeting> getMeetings() {
+        return meetings;
+    }
+
+    public void setMeetings(Set<Meeting> meetings) {
+        this.meetings = meetings;
+    }
+    
+    public void addMeeting(Meeting m) {
+        this.meetings.add(m);
+    }
+    
+    public void removeMeeting(Meeting m) {
+        this.meetings.remove(m);
+    }
+    
+    
 }
