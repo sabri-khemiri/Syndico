@@ -10,13 +10,16 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@DiscriminatorValue("SYNDIC")
-@Table(name = "account_syndic", catalog = "test")
+@DiscriminatorValue("TRUST")
+@Table(name = "account_trust", catalog = "test")
 public class AccountTrust extends Account {
-    protected static final String ROLE = "ROLE_SYNDIC";
+    protected static final String ROLE = "ROLE_TRUST";
     
     private Trust trust;
     
+    public AccountTrust(){
+        super();
+    }
     public AccountTrust(String username, String password){
         super(username, password);
     }

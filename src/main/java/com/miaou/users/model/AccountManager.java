@@ -17,6 +17,10 @@ public class AccountManager extends Account {
     
     private CoOwnership coOwnership;
 
+    public AccountManager(){
+        super();
+    }
+    
     public AccountManager(String username, String password){
         super(username, password);
     }

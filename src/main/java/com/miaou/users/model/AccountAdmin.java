@@ -11,6 +11,10 @@ import javax.persistence.Transient;
 public class AccountAdmin extends Account {
     protected static final String ROLE = "ROLE_ADMIN";
 
+    public AccountAdmin(){
+        super();
+    }
+    
     public AccountAdmin(String username, String password){
         super(username, password);
     }

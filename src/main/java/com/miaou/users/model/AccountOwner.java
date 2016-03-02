@@ -26,13 +26,14 @@ public class AccountOwner extends Account {
     private Set<Resolution> resolutions = new HashSet<Resolution>();
     
     public AccountOwner(){
+        super();
     }
     
     public AccountOwner(String username, String password){
         super(username, password);
     }
 
-    @Column(name = "flat_number", nullable = false)
+    @Column(name = "flat_number")
     public String getFlatNumber() {
         return flatNumber;
     }
