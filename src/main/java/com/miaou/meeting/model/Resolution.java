@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "meeting", catalog = "test")
+@Table(name = "resolution", catalog = "test")
 public class Resolution implements Serializable {
     private int id;
     private String title;

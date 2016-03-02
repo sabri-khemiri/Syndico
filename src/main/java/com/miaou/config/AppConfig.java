@@ -41,7 +41,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     public LocalSessionFactoryBean sessionFactory() throws IOException {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[]{"com.miaou.users.model", "com.miaou.trust.model"});
+        sessionFactory.setPackagesToScan(new String[]{"com.miaou.users.model", "com.miaou.trust.model", "com.miaou.meeting.model"});
         sessionFactory.setHibernateProperties(getHibernateProperties());
         sessionFactory.afterPropertiesSet();
         return sessionFactory;

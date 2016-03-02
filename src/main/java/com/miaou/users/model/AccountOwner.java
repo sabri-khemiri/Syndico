@@ -51,7 +51,7 @@ public class AccountOwner extends Account {
         this.coOwnership = coOwnership;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account_owner")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     public Set<Resolution> getResolutions() {
         return resolutions;
     }

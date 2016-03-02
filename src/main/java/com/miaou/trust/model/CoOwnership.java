@@ -136,8 +136,7 @@ public class CoOwnership implements Serializable {
         this.managers.remove(a);
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "meeting_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "coOwnership")
     public Set<Meeting> getMeetings() {
         return meetings;
     }

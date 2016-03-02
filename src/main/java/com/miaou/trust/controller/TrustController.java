@@ -37,7 +37,7 @@ public class TrustController {
             model.addObject("trust", t);
             model.setViewName("trust/addTrust");
         } else {
-            trustDao.add(t);
+            trustDao.addTrust(t);
             model.setViewName("hello");
         }
 
