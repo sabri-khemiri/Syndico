@@ -21,36 +21,36 @@
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,700&amp;subset=cyrillic,latin">
 
         <!-- CSS Global Compulsory -->
-        <link rel="stylesheet" href="<c:url value="resources/unify/assets/plugins/bootstrap/css/bootstrap.min.css" />">
-        <link rel="stylesheet" href="<c:url value="resources/unify/assets/css/style.css" />">
+        <link rel="stylesheet" href="<c:url value="resources/theme_1/assets/plugins/bootstrap/css/bootstrap.min.css" />">
+        <link rel="stylesheet" href="<c:url value="resources/theme_1/assets/css/style.css" />">
 
         <!-- CSS Implementing Plugins -->
-        <link rel="stylesheet" href="<c:url value="resources/unify/assets/plugins/animate.css" />">
-        <link rel="stylesheet" href="<c:url value="resources/unify/assets/plugins/line-icons/line-icons.css" />">
-        <link rel="stylesheet" href="<c:url value="resources/unify/assets/plugins/font-awesome/css/font-awesome.min.css" />">
-        <link rel="stylesheet" href="<c:url value="resources/unify/assets/plugins/brand-buttons/brand-buttons.css" />">
+        <link rel="stylesheet" href="<c:url value="resources/theme_1/assets/plugins/animate.css" />">
+        <link rel="stylesheet" href="<c:url value="resources/theme_1/assets/plugins/line-icons/line-icons.css" />">
+        <link rel="stylesheet" href="<c:url value="resources/theme_1/assets/plugins/font-awesome/css/font-awesome.min.css" />">
+        <link rel="stylesheet" href="<c:url value="resources/theme_1/assets/plugins/brand-buttons/brand-buttons.css" />">
 
         <!-- CSS Page Style -->
-        <link rel="stylesheet" href="<c:url value="resources/unify/assets/css/pages/page_log_reg_v4.css" />">
+        <link rel="stylesheet" href="<c:url value="resources/theme_1/assets/css/pages/page_log_reg_v4.css" />">
 
         <!-- CSS Theme -->
-        <link rel="stylesheet" href="<c:url value="resources/unify/assets/css/theme-colors/blue.css" />">
+        <link rel="stylesheet" href="<c:url value="resources/theme_1/assets/css/theme-colors/blue.css" />">
 
         <!-- CSS Customization -->
-        <link rel="stylesheet" href="<c:url value="resources/unify/assets/css/custom.css" />">
+        <link rel="stylesheet" href="<c:url value="resources/theme_1/assets/css/custom.css" />">
 
 
         <!-- JS Global Compulsory -->
-        <script src="<c:url value="resources/unify/assets/plugins/jquery/jquery.min.js" />"></script>
-        <script src="<c:url value="resources/unify/assets/plugins/jquery/jquery-migrate.min.js" />"></script>
-        <script src="<c:url value="resources/unify/assets/plugins/bootstrap/js/bootstrap.min.js" />"></script>
+        <script src="<c:url value="resources/theme_1/assets/plugins/jquery/jquery.min.js" />"></script>
+        <script src="<c:url value="resources/theme_1/assets/plugins/jquery/jquery-migrate.min.js" />"></script>
+        <script src="<c:url value="resources/theme_1/assets/plugins/bootstrap/js/bootstrap.min.js" />"></script>
 
         <!-- JS Implementing Plugins -->
-        <script src="<c:url value="resources/unify/assets/plugins/back-to-top.js" />"></script>
-        <script src="<c:url value="resources/unify/assets/plugins/backstretch/jquery.backstretch.min.js" />"></script>
+        <script src="<c:url value="resources/theme_1/assets/plugins/back-to-top.js" />"></script>
+        <script src="<c:url value="resources/theme_1/assets/plugins/backstretch/jquery.backstretch.min.js" />"></script>
 
         <!-- JS Customization -->
-        <script src="<c:url value="resources/unify/assets/js/custom.js" />"></script>
+        <script src="<c:url value="resources/theme_1/assets/js/custom.js" />"></script>
 
 
     </head>
@@ -60,7 +60,7 @@
             <div class="row equal-height-columns">
                 <div class="col-md-6 col-sm-6 hidden-xs image-block equal-height-column"></div>
                 <div class="col-md-6 col-sm-6 form-block equal-height-column">
-                    <img src="<c:url value="resources/unify/assets/img/themes/logo1-blue.png" />" alt="">
+                    <img src="<c:url value="resources/theme_1/assets/img/themes/logo1-blue.png" />" alt="">
                     <h2 class="margin-bottom-30"><spring:message code="login.titleForm"/></h2>
                     <c:if test="${error != null}">
                         <div class="alert alert-danger fade in">
@@ -134,7 +134,7 @@
 
 
 <!-- JS Page Level -->
-<script src="<c:url value="resources/unify/assets/js/app.js" />"></script>
+<script src="<c:url value="resources/theme_1/assets/js/app.js" />"></script>
 <script>
     jQuery(document).ready(function () {
         App.init();
@@ -143,9 +143,9 @@
 </script>
 <script>
     $(".image-block").backstretch([
-        "${pageContext.request.contextPath}/<c:url value="resources/unify/assets/images/login/login_bg_1.jpg" />",
-                "${pageContext.request.contextPath}/<c:url value="resources/unify/assets/images/login/login_bg_2.jpg" />",
-                        "${pageContext.request.contextPath}/<c:url value="resources/unify/assets/images/login/login_bg_3.jpg" />"
+        "${pageContext.request.contextPath}/<c:url value="resources/images/login/login_bg_1.jpg" />",
+                "${pageContext.request.contextPath}/<c:url value="resources/images/login/login_bg_2.jpg" />",
+                        "${pageContext.request.contextPath}/<c:url value="resources/images/login/login_bg_3.jpg" />"
 
                             ], {
                                 fade: 1000,
@@ -153,7 +153,7 @@
                             });
 </script>
 <!--[if lt IE 9]>
-    <script src="<c:url value="resources/unify/assets/plugins/respond.js" />"></script>
-    <script src="<c:url value="resources/unify/assets/plugins/html5shiv.js" />"></script>
-    <script src="<c:url value="resources/unify/assets/plugins/placeholder-IE-fixes.js" />"></script>
+    <script src="<c:url value="resources/theme_1/assets/plugins/respond.js" />"></script>
+    <script src="<c:url value="resources/theme_1/assets/plugins/html5shiv.js" />"></script>
+    <script src="<c:url value="resources/theme_1/assets/plugins/placeholder-IE-fixes.js" />"></script>
     <![endif]-->
