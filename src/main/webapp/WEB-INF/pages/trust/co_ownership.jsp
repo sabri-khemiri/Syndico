@@ -16,10 +16,10 @@
         <script>
             $(document).ready(function () {
                 $('.dataCoOwnership').DataTable({
-                    "dom": 'lTfigt',
-                    "tableTools": {
-                        "sSwfPath": "${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
-                    }
+                    "dom": 'lTfigtp',
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+                    }   
                 });
             });
         </script>
@@ -50,25 +50,11 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Copropriété</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="#">Config option 1</a>
-                                    </li>
-                                    <li><a href="#">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
                         </div>
                         <div class="ibox-content">
+                            <span class="row">
+                                <a href="${pageContext.request.contextPath}/trust/add_co_ownership"><button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> Nouvelle copropriété</button></a>
+                            </span>
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover dataCoOwnership" >
                                     <thead>
@@ -89,11 +75,25 @@
                                                 <td>${coOwnership.creationDate}</td>
                                                 <td class="center">50</td>
                                                 <td class="center">50</td>
-                                                <td>option</td>
+                                                <td><a><i class="fa fa-edit"></i></a></td>
                                             </tr>
                                         </c:forEach>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Adresse</th>
+                                            <th>Date</th>
+                                            <th>Nb gestionaire</th>
+                                            <th>Copropriétaire</th>
+                                            <th>Option</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
+                            <span class="row">
+                                <a href="${pageContext.request.contextPath}/trust/add_co_ownership"><button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> Nouvelle copropriété</button></a>
+                            </span>
                         </div>
                     </div>
                 </div>

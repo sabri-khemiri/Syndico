@@ -42,31 +42,37 @@
 
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Ajoût d'une nouvelle copropriété</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="row">
-                            <form:form role="form"  action="" commandName="coOwnership" method="POST" class="form-horizontal">  
-                                <div class="form-group"><label class="control-label">Nom</label>
-                                    <div class=""><form:input class="form-control" path="name" /></div>
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Création d'une nouvelle copropriété</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-offset-1 col-lg-10">
+                                    <form:form role="form"  action="" commandName="coOwnership" method="POST" class="">  
+                                        <div class="form-group"><label class="control-label">Nom <span class="text-danger">*</span></label> <small class="text-danger"><form:errors path="name"/></small>
+                                            <div class="${errors.hasFieldErrors('name') ? 'has-error' : ''}"><form:input class="form-control" path="name" value="${coOwnership.name}" /></div>
+                                        </div>
+                                        <div class="form-group"><label class="control-label">Adresse <span class="text-danger">*</span></label> <small class="text-danger"><form:errors path="address"/></small>
+                                            <div class="${errors.hasFieldErrors('address') ? 'has-error' : ''}"><form:input class="form-control" path="address" value="${coOwnership.address}" /></div>
+                                        </div>
+                                        <div class="form-group"><label class="control-label">Description</label>
+                                            <div class=""><form:textarea class="form-control" rows="10" path="description" value="${coOwnership.description}"  /></div>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Valider</strong></button>
+                                        </div>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    </form:form>
+                                    <p class="">(<span class="text-danger">*</span>)Champ obligatoire</p>
                                 </div>
-                                <div class="form-group"><label class="control-label">Adresse</label>
-                                    <div class=""><form:input class="form-control" path="address" /></div>
-                                </div>
-                                <div class="form-group"><label class="control-label">Description</label>
-                                    <div class=""><form:textarea class="form-control" rows="10" path="description" /></div>
-                                </div>
-                                <div>
-                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>OK</strong></button>
-                                    <input type="submit" />
-                                </div>
-                            </form:form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </jsp:body>
 </t:template>

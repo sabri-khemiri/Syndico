@@ -1,5 +1,7 @@
 package com.miaou.config;
 
+import com.miaou.trust.dao.CoOwnershipDao;
+import com.miaou.trust.dao.CoOwnershipDaoImpl;
 import com.miaou.trust.dao.TrustDao;
 import com.miaou.trust.dao.TrustDaoImpl;
 import com.miaou.users.dao.AccountDao;
@@ -97,6 +99,12 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     @Bean(name = "trustDao")
     public TrustDao getTrustDao(SessionFactory sessionFactory) {
         return new TrustDaoImpl(sessionFactory);
+    }
+    
+    @Autowired
+    @Bean(name = "coOwnershipDao")
+    public CoOwnershipDao getCoOwnershipDao(SessionFactory sessionFactory) {
+        return new CoOwnershipDaoImpl(sessionFactory);
     }
     
     @Bean

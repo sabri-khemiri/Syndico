@@ -3,13 +3,11 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template>
     <jsp:body>
-
-
         <div class="row  border-bottom white-bg dashboard-header">
             <h2>Bienvenu ${user.username}</h2>
         </div>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">Monthly</span>
@@ -20,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">Monthly</span>
@@ -31,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">Monthly</span>
@@ -42,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">Monthly</span>
