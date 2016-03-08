@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -77,7 +79,7 @@ public class Message implements Serializable {
         this.creationDate = creationDate;
     }
 
-    @Column(name = "message_status")
+    @Enumerated(EnumType.STRING)
     public MessageStatus getStatus() {
         return status;
     }
