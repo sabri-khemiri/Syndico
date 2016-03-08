@@ -1,16 +1,22 @@
 package com.miaou.users.model;
 
+import com.miaou.message.model.Message;
+import com.miaou.news.model.News;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -32,6 +38,10 @@ public class Account implements Serializable {
     protected String lastName;
     protected Date creationDate;
     protected String image;
+    
+    private Set<News> news = new HashSet<News>();
+    private Set<Message> messageSend = new HashSet<Message>();
+    private Set<Message> messageReceived = new HashSet<Message>();
     
 
     public Account() {
@@ -129,6 +139,57 @@ public class Account implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    public Set<News> getNews() {
+        return news;
+    }
+
+    public void setNews(Set<News> news) {
+        this.news = news;
+    }
+    
+    public void addNews(News n) {
+        this.news.add(n);
+    }
+    
+    public void removeNews(News n) {
+        this.news.remove(n);
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    public Set<Message> getMessageSend() {
+        return messageSend;
+    }
+
+    public void setMessageSend(Set<Message> messageSend) {
+        this.messageSend = messageSend;
+    }
+    
+    public void addMessageSend(Message m) {
+        this.messageSend.add(m);
+    }
+    
+    public void removeMessageSend(Message m) {
+        this.messageSend.remove(m);
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    public Set<Message> getMessageReceived() {
+        return messageReceived;
+    }
+
+    public void setMessageReceived(Set<Message> messageReceived) {
+        this.messageReceived = messageReceived;
+    }
+    
+    public void addMessageReceived(Message m) {
+        this.messageReceived.add(m);
+    }
+    
+    public void removeMessageReceived(Message m) {
+        this.messageReceived.remove(m);
     }
     
     @Transient

@@ -1,6 +1,7 @@
 package com.miaou.trust.model;
 
 import com.miaou.meeting.model.Meeting;
+import com.miaou.news.model.News;
 import com.miaou.users.model.AccountManager;
 import com.miaou.users.model.AccountOwner;
 import com.miaou.works.model.Works;
@@ -34,6 +35,7 @@ public class CoOwnership implements Serializable {
     private Set<AccountManager> managers = new HashSet<AccountManager>();
     private Set<Meeting> meetings = new HashSet<Meeting>();
     private Set<Works> works = new HashSet<Works>();
+    private Set<News> news = new HashSet<News>();
 
 
     public CoOwnership() {
@@ -165,7 +167,7 @@ public class CoOwnership implements Serializable {
         this.works = works;
     }
     
-        public void addWorks(Works w) {
+    public void addWorks(Works w) {
         this.works.add(w);
     }
     
@@ -173,7 +175,20 @@ public class CoOwnership implements Serializable {
         this.works.remove(w);
     }
     
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "coOwnership")
+    public Set<News> getNews() {
+        return news;
+    }
+
+    public void setNews(Set<News> news) {
+        this.news = news;
+    }
     
+    public void addNews(News n) {
+        this.news.add(n);
+    }
     
-    
+    public void removeNews(News n) {
+        this.news.remove(n);
+    }
 }
