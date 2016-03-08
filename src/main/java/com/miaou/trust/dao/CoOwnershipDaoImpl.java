@@ -57,4 +57,16 @@ public class CoOwnershipDaoImpl implements CoOwnershipDao {
     public void updateCoOwnership(CoOwnership coOwnership) {
         sessionFactory.getCurrentSession().saveOrUpdate(coOwnership);
     }
+
+    @Override
+    @Transactional
+    public CoOwnership getById(int id) {
+        List<CoOwnership> coOwnerships = new ArrayList<CoOwnership>();
+        coOwnerships = sessionFactory.getCurrentSession().createQuery("from CoOwnership where id=?").setParameter(0, id).list();
+        if (coOwnerships.size() > 0) {
+            return coOwnerships.get(0);
+        } else {
+            return null;
+        }
+    }
 }

@@ -1,11 +1,15 @@
 package com.miaou.config;
 
+import com.miaou.meeting.dao.MeetingDao;
+import com.miaou.meeting.dao.MeetingDaoImpl;
 import com.miaou.trust.dao.CoOwnershipDao;
 import com.miaou.trust.dao.CoOwnershipDaoImpl;
 import com.miaou.trust.dao.TrustDao;
 import com.miaou.trust.dao.TrustDaoImpl;
 import com.miaou.users.dao.AccountDao;
 import com.miaou.users.dao.AccountDaoImpl;
+import com.miaou.works.dao.WorksDao;
+import com.miaou.works.dao.WorksDaoImpl;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Properties;
@@ -105,6 +109,18 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     @Bean(name = "coOwnershipDao")
     public CoOwnershipDao getCoOwnershipDao(SessionFactory sessionFactory) {
         return new CoOwnershipDaoImpl(sessionFactory);
+    }
+    
+    @Autowired
+    @Bean(name = "meetingDao")
+    public MeetingDao getMeetingDao(SessionFactory sessionFactory) {
+        return new MeetingDaoImpl(sessionFactory);
+    }
+    
+    @Autowired
+    @Bean(name = "worksDao")
+    public WorksDao getWorksDao(SessionFactory sessionFactory) {
+        return new WorksDaoImpl(sessionFactory);
     }
     
     @Bean

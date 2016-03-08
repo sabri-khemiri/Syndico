@@ -25,7 +25,7 @@ public class AccountTrust extends Account {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "trust_id")
+    @JoinColumn(name = "trust_trust_id")
     public Trust getTrust() {
         return trust;
     }
@@ -35,7 +35,7 @@ public class AccountTrust extends Account {
     }
     
     @Transient
-    public String getRoles(){
+    public String getRole(){
         return ROLE;
     }
 

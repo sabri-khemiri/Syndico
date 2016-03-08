@@ -32,8 +32,13 @@ public class AccountOwner extends Account {
     public AccountOwner(String username, String password){
         super(username, password);
     }
+    
+    public AccountOwner(String username, String password, CoOwnership coOwnership){
+        super(username, password);
+        this.coOwnership = coOwnership;
+    }
 
-    @Column(name = "flat_number")
+    @Column(name = "owner_flat_number")
     public String getFlatNumber() {
         return flatNumber;
     }
@@ -43,7 +48,7 @@ public class AccountOwner extends Account {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "co_ownership_id")  
+    @JoinColumn(name = "owner_co_ownership_id1")  
     public CoOwnership getCoOwnership() {
         return coOwnership;
     }
@@ -70,7 +75,7 @@ public class AccountOwner extends Account {
     }
     
     @Transient
-    public String getRoles(){
+    public String getRole(){
         return ROLE;
     }
 }

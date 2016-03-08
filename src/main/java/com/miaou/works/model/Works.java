@@ -29,7 +29,7 @@ public class Works implements Serializable {
     protected String title;
     protected String contents;
     protected Date startDate;
-    protected String duration;
+    protected Date endDate;
     protected Date creationDate;
     
     private CoOwnership coOwnership;
@@ -45,19 +45,19 @@ public class Works implements Serializable {
         this.contents = contents;
     }
     
-     public Works(String title, String contents, String duration, Date startDate) {
+     public Works(String title, String contents, Date endDate, Date startDate) {
         this(title, contents);
-        this.duration = duration;
+        this.endDate = endDate;
         this.startDate = startDate;
     }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getID() {
+    public int getId() {
         return this.id;
     }
 
-    public void setID(int id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -88,13 +88,13 @@ public class Works implements Serializable {
         this.startDate = startDate;
     }
 
-    @Column(name = "duration")
-    public String getDuration() {
-        return duration;
+    @Column(name = "end_date")
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     @Column(name = "creation_date", nullable = false)

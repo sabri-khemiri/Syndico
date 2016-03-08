@@ -24,8 +24,14 @@ public class AccountManager extends Account {
     public AccountManager(String username, String password){
         super(username, password);
     }
+    
+    public AccountManager(String username, String password, CoOwnership coOwnership){
+        super(username, password);
+        this.coOwnership = coOwnership;
+    }
+    
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "co_ownership_id")  
+    @JoinColumn(name = "manager_co_ownership_id")  
     public CoOwnership getCoOwnership() {
         return coOwnership;
     }
@@ -35,7 +41,7 @@ public class AccountManager extends Account {
     }
     
     @Transient
-    public String getRoles(){
+    public String getRole(){
         return ROLE;
     }
 }

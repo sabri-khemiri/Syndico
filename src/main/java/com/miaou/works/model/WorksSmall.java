@@ -13,6 +13,10 @@ public class WorksSmall extends Works {
     protected static final String ROLE = "ROLE_SMALL";
     
     private int cost; 
+    
+    public WorksSmall(){
+        super();
+    }
 
     public WorksSmall(String title, String contents){
         super(title, contents);

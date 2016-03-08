@@ -20,7 +20,7 @@ public class AccountAdmin extends Account {
     }
     
     @Transient
-    public String getRoles(){
+    public String getRole(){
         return ROLE;
     }
 }

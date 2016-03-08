@@ -3,6 +3,7 @@ package com.miaou.trust.model;
 import com.miaou.meeting.model.Meeting;
 import com.miaou.users.model.AccountManager;
 import com.miaou.users.model.AccountOwner;
+import com.miaou.works.model.Works;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -32,6 +33,8 @@ public class CoOwnership implements Serializable {
     private Set<AccountOwner> owners = new HashSet<AccountOwner>();
     private Set<AccountManager> managers = new HashSet<AccountManager>();
     private Set<Meeting> meetings = new HashSet<Meeting>();
+    private Set<Works> works = new HashSet<Works>();
+
 
     public CoOwnership() {
         creationDate = new Date();
@@ -39,11 +42,11 @@ public class CoOwnership implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getID() {
+    public int getId() {
         return this.id;
     }
 
-    public void setID(int id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -152,6 +155,25 @@ public class CoOwnership implements Serializable {
     public void removeMeeting(Meeting m) {
         this.meetings.remove(m);
     }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "coOwnership")
+    public Set<Works> getWorks() {
+        return works;
+    }
+
+    public void setWorks(Set<Works> works) {
+        this.works = works;
+    }
+    
+        public void addWorks(Works w) {
+        this.works.add(w);
+    }
+    
+    public void removeWorks(Works w) {
+        this.works.remove(w);
+    }
+    
+    
     
     
 }

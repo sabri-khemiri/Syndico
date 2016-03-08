@@ -2,6 +2,7 @@ package com.miaou.meeting.model;
 
 import com.miaou.trust.model.CoOwnership;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
@@ -24,6 +25,7 @@ public class Meeting implements Serializable {
     private String contents;
     private Date creationDate;
     private Date meetingDate;
+    private String meetingHours;
     private String report;
 
     private CoOwnership coOwnership;
@@ -35,11 +37,11 @@ public class Meeting implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getID() {
+    public int getId() {
         return this.id;
     }
 
-    public void setID(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -70,7 +72,18 @@ public class Meeting implements Serializable {
         this.meetingDate = meetingDate;
     }
 
-    @Column(name = "report", nullable = false)
+    @Column(name = "meeting_hours", nullable = false)
+    public String getMeetingHours() {
+        return meetingHours;
+    }
+
+    public void setMeetingHours(String meetingHours) {
+        this.meetingHours = meetingHours;
+    }
+    
+    
+
+    @Column(name = "report")
     public String getReport() {
         return report;
     }

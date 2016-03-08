@@ -51,11 +51,11 @@ public class Account implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getID() {
+    public int getId() {
         return this.id;
     }
 
-    public void setID(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -114,11 +114,11 @@ public class Account implements Serializable {
     }
 
     @Column(name = "creation_date")
-    public Date getDateCreation() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setDateCreation(Date creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
     
@@ -132,7 +132,7 @@ public class Account implements Serializable {
     }
     
     @Transient
-    public String getRoles(){
+    public String getRole(){
         return ROLE;
     }
 }
