@@ -305,6 +305,7 @@ public class ManagerController {
                 news.setType(NewsType.ANNOUNCEMENT);
                 news.setAccount(account);
                 news.setCoOwnership(account.getCoOwnership());
+                news.setImage("annonce.png");
                 newsDao.addNews(news);
                 return new ModelAndView("redirect:/manager/co_ownership");
             }

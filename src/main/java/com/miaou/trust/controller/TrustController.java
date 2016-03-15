@@ -281,6 +281,7 @@ public class TrustController {
             else {
                 news.setType(NewsType.ANNOUNCEMENT);
                 news.setAccount(account);
+                news.setImage("annonce.png");
                 newsDao.addNews(news);
                 return new ModelAndView("redirect:/trust/co_ownership/view/" + news.getCoOwnership().getId());
             }
