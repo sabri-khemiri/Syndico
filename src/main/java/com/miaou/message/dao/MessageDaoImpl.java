@@ -32,6 +32,18 @@ public class MessageDaoImpl implements MessageDao {
     
     @Override
     @Transactional
+    public Message getById(int id) {
+        List<Message> message = new ArrayList<Message>();
+        message = sessionFactory.getCurrentSession().createQuery("from Message where id=?").setParameter(0, id).list();
+        if (message.size() > 0) {
+            return message.get(0);
+        } else {
+            return null;
+        }
+    }
+    
+    @Override
+    @Transactional
     public void addMessage(Message message) {
         sessionFactory.getCurrentSession().persist(message);
     }

@@ -2,6 +2,14 @@ package com.miaou.config;
 
 import com.miaou.meeting.dao.MeetingDao;
 import com.miaou.meeting.dao.MeetingDaoImpl;
+import com.miaou.meeting.dao.ResolutionDao;
+import com.miaou.meeting.dao.ResolutionDaoImpl;
+import com.miaou.message.dao.MessageDao;
+import com.miaou.message.dao.MessageDaoImpl;
+import com.miaou.news.dao.NewCommentDao;
+import com.miaou.news.dao.NewCommentDaoImpl;
+import com.miaou.news.dao.NewsDao;
+import com.miaou.news.dao.NewsDaoImpl;
 import com.miaou.trust.dao.CoOwnershipDao;
 import com.miaou.trust.dao.CoOwnershipDaoImpl;
 import com.miaou.trust.dao.TrustDao;
@@ -10,6 +18,8 @@ import com.miaou.users.dao.AccountDao;
 import com.miaou.users.dao.AccountDaoImpl;
 import com.miaou.works.dao.WorksDao;
 import com.miaou.works.dao.WorksDaoImpl;
+import com.miaou.works.dao.WorksRequestDao;
+import com.miaou.works.dao.WorksRequestDaoImpl;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Properties;
@@ -47,7 +57,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     public LocalSessionFactoryBean sessionFactory() throws IOException {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[]{"com.miaou.users.model", "com.miaou.trust.model", "com.miaou.meeting.model", "com.miaou.works.model"});
+        sessionFactory.setPackagesToScan(new String[]{"com.miaou.users.model", "com.miaou.trust.model", "com.miaou.meeting.model", "com.miaou.works.model", "com.miaou.news.model","com.miaou.message.model"});
         sessionFactory.setHibernateProperties(getHibernateProperties());
         sessionFactory.afterPropertiesSet();
         return sessionFactory;
@@ -116,11 +126,41 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     public MeetingDao getMeetingDao(SessionFactory sessionFactory) {
         return new MeetingDaoImpl(sessionFactory);
     }
+
+    @Autowired
+    @Bean(name = "resolutionDao")
+    public ResolutionDao getResolutionDao(SessionFactory sessionFactory) {
+        return new ResolutionDaoImpl(sessionFactory);
+    }
+    
+    @Autowired
+    @Bean(name = "messageDao")
+    public MessageDao getMessageDao(SessionFactory sessionFactory) {
+        return new MessageDaoImpl(sessionFactory);
+    }
     
     @Autowired
     @Bean(name = "worksDao")
     public WorksDao getWorksDao(SessionFactory sessionFactory) {
         return new WorksDaoImpl(sessionFactory);
+    }
+    
+    @Autowired
+    @Bean(name = "worksRequestDao")
+    public WorksRequestDao getWorksRequestDao(SessionFactory sessionFactory) {
+        return new WorksRequestDaoImpl(sessionFactory);
+    }
+    
+    @Autowired
+    @Bean(name = "newsDao")
+    public NewsDao getNewsDao(SessionFactory sessionFactory) {
+        return new NewsDaoImpl(sessionFactory);
+    }
+    
+    @Autowired
+    @Bean(name = "newCommentDao")
+    public NewCommentDao getNewCommentDao(SessionFactory sessionFactory) {
+        return new NewCommentDaoImpl(sessionFactory);
     }
     
     @Bean

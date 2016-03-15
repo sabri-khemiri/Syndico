@@ -1,5 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@attribute name="js" fragment="true" %>
 <%@attribute name="css" fragment="true" %>
 <%@attribute name="title" fragment="true" %>
@@ -29,36 +30,41 @@
                 <div class="sidebar-collapse">
                     <ul class="nav metismenu" id="side-menu">
                         <li class="nav-header">
-                            <div class="dropdown profile-element"> 
-                                <span>
-                                    <img alt="image" class="img-circle" height="100" width="100"  src="${pageContext.request.contextPath}/resources/images/user/avatar1.jpg" />
-                                </span>
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">${trust.name}</strong>
-                                        </span> <span class="text-muted text-xs block">${account.firstName} ${account.lastName}<b class="caret"></b></span> </span> </a>
-                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                    <li><a href="profile.html">Profile</a></li>
-                                    <li><a href="contacts.html">Contacts</a></li>
-                                    <li><a href="mailbox.html">Mailbox</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="login.html">Logout</a></li>
-                                </ul>
+                            <div class="dropdown profile-element row"> 
+                                <a href="#">
+                                    <span class="col-lg-10 col-lg-offset-1">
+                                        <img alt="image" class="img-responsive img-circle" src="${pageContext.request.contextPath}/resources/images/user/${account.id}${account.image}" />
+                                    </span>
+                                    <samp class="clearfix"></samp>
+                                    <span class="clear"> 
+                                        <span class="block m-t-xs"> <strong class="font-bold">${trust.name}</strong></span>
+                                        <span class="text-xs block">${account.firstName} ${account.lastName}</span>
+                                    </span>
+                                </a>
                             </div>
                             <div class="logo-element">
-                                IN+
+                                Syn
                             </div>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/trust/co_ownership"><i class="fa fa-building-o"></i> <span class="nav-label">Copropriété</span></a>
+                            <a href="${pageContext.request.contextPath}/trust"><i class="fa fa-home"></i> <span class="nav-label">Acceuil</span></a>
                         </li>
                         <li>
-                            <a href="layouts.html"><i class="fa fa-comments-o"></i> <span class="nav-label">Annonce</span></a>
+                            <a href="${pageContext.request.contextPath}/trust/co_ownership/all"><i class="fa fa-building-o"></i> <span class="nav-label">Copropriétés</span></a>
                         </li>
                         <li>
-                            <a href="layouts.html"><i class="fa fa-envelope-o"></i> <span class="nav-label">Message</span></a>
+                            <a  href="${pageContext.request.contextPath}/trust/message"><i class="fa fa-envelope-o"></i> <span class="nav-label">Message</span></a>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/trust/news/add"><i class="fa fa-comments-o"></i> <span class="nav-label">Annonce General</span></a>
+                        </li>
+                        <li>
+                            <a href=""><i class="fa fa-user"></i> <span class="nav-label">Mon profil</span></a>
+                        </li>                        
+                        <li>
+                            <a href=""><i class="fa fa-question"></i> <span class="nav-label">Aide</span></a>
                         </li>
                     </ul>
-
                 </div>
             </nav>
 
@@ -73,17 +79,7 @@
                                 <span class="m-r-sm text-muted welcome-message">Lundi 01 Janvier 2016 : 16h00</span>
                             </li>
                             <li>
-                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="login.html">
+                                <a href="${pageContext.request.contextPath}/logout">
                                     <i class="fa fa-sign-out"></i> Deconnexion
                                 </a>
                             </li>
@@ -94,7 +90,7 @@
                 <jsp:doBody/>
                 <div class="footer fixed">
                     <div>
-                        <strong>Copyright</strong> Example Company &copy; 2014-2015
+                        <spring:message code="login.copyright"/>
                     </div>
                 </div>
 

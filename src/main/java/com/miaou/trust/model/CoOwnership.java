@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -176,6 +177,7 @@ public class CoOwnership implements Serializable {
     }
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "coOwnership")
+    @OrderBy("creationDate DESC")
     public Set<News> getNews() {
         return news;
     }

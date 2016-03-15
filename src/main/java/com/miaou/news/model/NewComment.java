@@ -1,5 +1,6 @@
 package com.miaou.news.model;
 
+import com.miaou.users.model.Account;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ public class NewComment implements Serializable {
     private Date creationDate;
     
     private News news;
+    private Account author;
     
     public NewComment() {
         creationDate = new Date();
@@ -67,6 +69,18 @@ public class NewComment implements Serializable {
     public void setNews(News news) {
         this.news = news;
     }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
+    public Account getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Account author) {
+        this.author = author;
+    }
+    
+    
     
     
     

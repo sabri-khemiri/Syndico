@@ -48,7 +48,7 @@ public class AccountOwner extends Account {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "owner_co_ownership_id1")  
+    @JoinColumn(name = "owner_co_ownership_id")  
     public CoOwnership getCoOwnership() {
         return coOwnership;
     }

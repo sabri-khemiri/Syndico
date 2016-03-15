@@ -10,6 +10,7 @@ public interface MeetingDao {
     public List<Meeting> getAll();
     public List<Meeting> getByMeetingDate(Date meetingDate);
     public List<Meeting> getByCoOwnership(CoOwnership coOwnership);
+    public Meeting getById(int id);
     public void addMeeting(Meeting meeting);
     public void removeMeeting(Meeting meeting);
     public void updateMeeting(Meeting meeting);

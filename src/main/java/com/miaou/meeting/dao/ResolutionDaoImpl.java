@@ -44,6 +44,18 @@ public class ResolutionDaoImpl implements ResolutionDao {
     
     @Override
     @Transactional
+    public Resolution getById(int id) {
+        List<Resolution> resolution = new ArrayList<Resolution>();
+        resolution = sessionFactory.getCurrentSession().createQuery("from NewComment where id=?").setParameter(0, id).list();
+        if (resolution.size() > 0) {
+            return resolution.get(0);
+        } else {
+            return null;
+        }
+    }
+    
+    @Override
+    @Transactional
     public Resolution getByAccountOwner(AccountOwner accountOwner) {
         List<Resolution> resolutions = new ArrayList<Resolution>();
         resolutions = sessionFactory.getCurrentSession().createQuery("from Resolution where account_owner_id=?").setParameter(0, accountOwner).list();

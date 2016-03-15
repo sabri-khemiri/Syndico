@@ -2,6 +2,7 @@ package com.miaou.users.model;
 
 import com.miaou.message.model.Message;
 import com.miaou.news.model.News;
+import com.miaou.news.model.NewComment;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -40,6 +41,7 @@ public class Account implements Serializable {
     protected String image;
     
     private Set<News> news = new HashSet<News>();
+    private Set<NewComment> newComments = new HashSet<NewComment>();
     private Set<Message> messageSend = new HashSet<Message>();
     private Set<Message> messageReceived = new HashSet<Message>();
     
@@ -158,7 +160,7 @@ public class Account implements Serializable {
         this.news.remove(n);
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sender")
     public Set<Message> getMessageSend() {
         return messageSend;
     }
@@ -175,7 +177,7 @@ public class Account implements Serializable {
         this.messageSend.remove(m);
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "recipient")
     public Set<Message> getMessageReceived() {
         return messageReceived;
     }
@@ -190,6 +192,23 @@ public class Account implements Serializable {
     
     public void removeMessageReceived(Message m) {
         this.messageReceived.remove(m);
+    }
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
+    public Set<NewComment> getNewComments() {
+        return newComments;
+    }
+
+    public void setNewComments(Set<NewComment> newComments) {
+        this.newComments = newComments;
+    }
+    
+    public void addNewComments(NewComment n) {
+        this.newComments.add(n);
+    }
+    
+    public void removeNewComments(NewComment n) {
+        this.newComments.remove(n);
     }
     
     @Transient

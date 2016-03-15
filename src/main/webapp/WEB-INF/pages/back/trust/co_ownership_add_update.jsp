@@ -2,7 +2,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
-<t:template>
+<t:template_trust>
+    <jsp:attribute name="title">Ajout Copropriété</jsp:attribute>
+
     <jsp:attribute name="css">
         <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
@@ -23,16 +25,16 @@
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Copropriété</h2>
+                <h2>Ajout d'une nouvelle copropriété</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="${pageContext.request.contextPath}/trust">Accueil</a>
                     </li>
                     <li>
-                        <a>Tables</a>
+                        <a href="${pageContext.request.contextPath}/trust/co_ownership/all">Copropriétés</a>
                     </li>
                     <li class="active">
-                        <strong>Data Tables</strong>
+                        <strong>Ajout copropriété</strong>
                     </li>
                 </ol>
             </div>
@@ -64,6 +66,7 @@
                                             <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Valider</strong></button>
                                         </div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                        <input type="hidden" name="id" value="${coOwnership.id}"/>
                                     </form:form>
                                     <p class="">(<span class="text-danger">*</span>)Champ obligatoire</p>
                                 </div>
@@ -73,6 +76,5 @@
                 </div>
             </div>
         </div>
-
     </jsp:body>
-</t:template>
+</t:template_trust>

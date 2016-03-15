@@ -9,6 +9,7 @@ public interface ResolutionDao {
     public List<Resolution> getAll();
     public Resolution getByTitle(String title);
     public Resolution getByAccountOwner(AccountOwner accountOwner);
+    public Resolution getById(int id);
     public void addResolution(Resolution resolution);
     public void removeResolution(Resolution resolution);
     public void updateResolution(Resolution resolution);

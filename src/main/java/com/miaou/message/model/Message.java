@@ -52,7 +52,7 @@ public class Message implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "contents", length = 250)
+    @Column(name = "subject", length = 250)
     public String getSubject() {
         return subject;
     }
@@ -89,7 +89,7 @@ public class Message implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "account_sender_id")
     public Account getSender() {
         return sender;
     }
@@ -99,7 +99,7 @@ public class Message implements Serializable {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "account_recipient_id")
     public Account getRecipient() {
         return recipient;
     }

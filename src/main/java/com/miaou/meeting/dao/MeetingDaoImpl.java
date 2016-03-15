@@ -45,6 +45,18 @@ public class MeetingDaoImpl implements MeetingDao {
     
     @Override
     @Transactional
+    public Meeting getById(int id) {
+        List<Meeting> meeting = new ArrayList<Meeting>();
+        meeting = sessionFactory.getCurrentSession().createQuery("from NewComment where id=?").setParameter(0, id).list();
+        if (meeting.size() > 0) {
+            return meeting.get(0);
+        } else {
+            return null;
+        }
+    }
+    
+    @Override
+    @Transactional
     public List<Meeting> getByCoOwnership(CoOwnership coOwnership) {
         List<Meeting> meetings = new ArrayList<Meeting>();
         meetings = sessionFactory.getCurrentSession().createQuery("from Meeting where co_ownership_id=?").setParameter(0, coOwnership).list();

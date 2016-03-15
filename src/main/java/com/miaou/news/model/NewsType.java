@@ -1,7 +1,9 @@
 package com.miaou.news.model;
 
 public enum NewsType {
-    COMMENT,
+    NEW_CO_OWNERSHIP,
+    ANNOUNCEMENT,
     MEETING,
+    WORKS,
     EN_ATTENTE;
 }
