@@ -1,3 +1,4 @@
+
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -51,7 +52,7 @@
 
         <!-- JS Customization -->
         <script src="<c:url value="resources/theme_1/assets/js/custom.js" />"></script>
-
+        
 
     </head>
     <body>
@@ -66,7 +67,7 @@
                         <div class="alert alert-danger fade in">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <p class="center-block"><spring:message code="login.error"/></p>
-                        </div>
+                        </div> 
                     </c:if>
                     <form name='loginForm' action="<c:url value='/login' />" method='POST'>
                         <div class="login-block">

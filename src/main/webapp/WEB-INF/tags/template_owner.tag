@@ -87,7 +87,7 @@
                         <ul class="nav navbar-nav">
                             <!-- Home -->
                             <li>
-                                <a href="${pageContext.request.contextPath}/owner" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="${pageContext.request.contextPath}/owner" class="dropdown-toggle" >
                                     Accueil
                                 </a>
                             </li>
@@ -102,7 +102,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/owner/message" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="${pageContext.request.contextPath}/owner/message" class="dropdown-toggle" >
                                     Message
                                 </a>
                             </li>

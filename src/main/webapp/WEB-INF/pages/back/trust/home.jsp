@@ -4,7 +4,7 @@
 <t:template_trust>
     <jsp:body>
         <div class="row  border-bottom white-bg dashboard-header">
-            <h2>Bienvenu ${user.username}</h2>
+            <h2>Bienvenue ${user.username}</h2>
         </div>
         <div class="row">
             <div class="col-lg-3 col-sm-6">

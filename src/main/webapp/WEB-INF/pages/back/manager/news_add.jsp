@@ -37,7 +37,7 @@
                                 <div class="form-group"><label class="col-sm-2 control-label">Titre :</label>
                                     <div class="col-sm-10"><form:input type="text" path="title" class="form-control" /></div>
                                 </div>
-                                <div class="form-group"><label class="col-sm-2 control-label">Contenue :</label>
+                                <div class="form-group"><label class="col-sm-2 control-label">Contenu :</label>
                                     <div class="col-sm-10 "><form:textarea rows="10" type="text" path="contents" class="form-control" /></div>
                                 </div>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
