@@ -10,6 +10,7 @@ import com.miaou.news.model.News;
 import com.miaou.news.model.NewsType;
 import com.miaou.trust.dao.CoOwnershipDao;
 import com.miaou.trust.dao.TrustDao;
+import com.miaou.trust.form.AccountFormValidator;
 import com.miaou.trust.form.CoOwnershipFormValidator;
 import com.miaou.trust.form.MessageFormValidato;
 import com.miaou.trust.form.MettingFormValidato;
@@ -21,6 +22,8 @@ import com.miaou.users.model.Account;
 import com.miaou.users.model.AccountManager;
 import com.miaou.users.model.AccountOwner;
 import com.miaou.works.dao.WorksDao;
+import com.miaou.works.dao.WorksRequestDao;
+import com.miaou.works.model.WorksRequest;
 import com.miaou.works.model.WorksSmall;
 
 import java.util.LinkedHashMap;
@@ -62,6 +65,9 @@ public class ManagerController {
     @Autowired
     private NewsDao newsDao;
 
+    @Autowired
+    private WorksRequestDao worksRequestDao;
+
     @RequestMapping(value = {"/manager"}, method = RequestMethod.GET)
     public ModelAndView homeManagerPage() {
         return getMinModel(getAccount(), "home");
@@ -92,10 +98,13 @@ public class ManagerController {
                 model.addObject("coOwnership", coOwnership);
                 return model;
             } else {
-                coOwnership.setTrust(account.getCoOwnership().getTrust());
-                coOwnershipDao.updateCoOwnership(coOwnership);
+                CoOwnership c = coOwnershipDao.getById(coOwnership.getId());
+                c.setAddress(coOwnership.getAddress());
+                c.setName(coOwnership.getName());
+                c.setDescription(coOwnership.getDescription());
+                coOwnershipDao.updateCoOwnership(c);
                 
-                return new ModelAndView("redirect:/trust/co_ownership/view/"+coOwnership.getId());
+                return new ModelAndView("redirect:/manager/co_ownership/");
             }
         } else {
             ModelAndView model = getMinModel(account, "co_ownership_add_update");
@@ -164,44 +173,7 @@ public class ManagerController {
         }
     }
     
-    @RequestMapping(value = {"/manager/works/add"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView addWorksPage(WorksSmall works, BindingResult result, HttpServletRequest request) {
-        AccountManager account = getAccount();
-        
-        if (request.getMethod() == "POST") {
-            WorksFormValidato fv = new WorksFormValidato();
-            fv.validate(works, result);
-            if (result.hasErrors()) {
-                ModelAndView model = getMinModel(account, "works_add");
-                model.addObject("errors", result);
-                model.addObject("works", works);
-                return model;
-            } 
-            else {
-                works.setCoOwnership(account.getCoOwnership());
-                worksDao.addWorks(works);
-                
-                News news = new News();
-                news.setAccount(account);
-                news.setTitle("Travaux : " + works.getTitle());
-                news.setContents(works.getContents());
-                news.setType(NewsType.WORKS);
-                news.setImage("works.png");
-                news.setCoOwnership(account.getCoOwnership());
-
-                newsDao.addNews(news);
-                
-                return new ModelAndView("redirect:/manager/co_ownership");
-            }
-        } 
-        else {            
-            ModelAndView model = getMinModel(account, "works_add");
-            works = new WorksSmall();
-            works.setCoOwnership(account.getCoOwnership());
-            model.addObject("works", works);
-            return model;
-        }
-    }
+   
     
     /**************************************************************************/
     /**************************DEBUT DES PAGES MESSAGE*************************/
@@ -316,11 +288,144 @@ public class ManagerController {
             return model;
         }
     }
+
     
+    @RequestMapping(value = {"/manager/profil"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView profilPage(Account faccount, BindingResult result, HttpServletRequest request) {
+        AccountManager account = getAccount();
+
+        if (request.getMethod() == "POST") {
+            AccountFormValidator fv = new AccountFormValidator();
+            fv.validate(faccount, result);
+
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "profil");
+                model.addObject("errors", result);
+                model.addObject("faccount", faccount);
+                return model;
+            } else {
+                account.setEmail(faccount.getEmail());
+                account.setFirstName(faccount.getFirstName());
+                account.setLastName(faccount.getLastName());
+                accountDao.updateAccount(account);
+                
+                return new ModelAndView("redirect:/manager/profil");
+            }
+        } else {
+            ModelAndView model = getMinModel(account, "profil");
+            model.addObject("faccount", account);
+            return model;
+        }
+    }
     
+    @RequestMapping(value = {"/manager/works/add"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView addWorksPage(WorksSmall works, BindingResult result, HttpServletRequest request) {
+        AccountManager account = getAccount();
+        
+        if (request.getMethod() == "POST") {
+            WorksFormValidato fv = new WorksFormValidato();
+            fv.validate(works, result);
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "works_add");
+                model.addObject("errors", result);
+                model.addObject("works", works);
+                return model;
+            } 
+            else {
+                works.setCoOwnership(account.getCoOwnership());
+                worksDao.addWorks(works);
+                
+                News news = new News();
+                news.setAccount(account);
+                news.setTitle("Travaux : " + works.getTitle());
+                news.setContents(works.getContents());
+                news.setType(NewsType.WORKS);
+                news.setImage("works.png");
+                news.setCoOwnership(account.getCoOwnership());
+
+                newsDao.addNews(news);
+                
+                return new ModelAndView("redirect:/manager/co_ownership");
+            }
+        } 
+        else {            
+            ModelAndView model = getMinModel(account, "works_add");
+            works = new WorksSmall();
+            works.setCoOwnership(account.getCoOwnership());
+            model.addObject("works", works);
+            return model;
+        }
+    }
     
+    @RequestMapping(value = {"/manager/works/add/{id}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody ModelAndView addWorksRPage(WorksSmall works, BindingResult result, HttpServletRequest request, @PathVariable(value="id") int id) {
+        AccountManager account = getAccount();
+        
+        if (request.getMethod() == "POST") {
+            WorksFormValidato fv = new WorksFormValidato();
+            fv.validate(works, result);
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "works_add");
+                model.addObject("errors", result);
+                model.addObject("works", works);
+                return model;
+            } 
+            else {
+                works.setCoOwnership(account.getCoOwnership());
+                
+                worksDao.addWorks(works);
+                
+                WorksRequest wr = worksRequestDao.getById(id);
+                wr.setWorks(works);
+                wr.setStatus("OK");
+                worksRequestDao.updateWorksRequest(wr);
+                
+                News news = new News();
+                news.setAccount(account);
+                news.setTitle("Travaux : " + works.getTitle());
+                news.setContents(works.getContents());
+                news.setType(NewsType.WORKS);
+                news.setImage("works.png");
+                news.setCoOwnership(account.getCoOwnership());
+
+                newsDao.addNews(news);
+                
+                return new ModelAndView("redirect:/manager/co_ownership");
+            }
+        } 
+        else {            
+            ModelAndView model = getMinModel(account, "works_add");
+            works = new WorksSmall();
+            works.setCoOwnership(account.getCoOwnership());
+            model.addObject("works", works);
+            return model;
+        }
+    }
     
+    @RequestMapping(value = {"/manager/works/refuse/{id}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody ModelAndView refuseWorksPage(@PathVariable(value="id") int id) {
+        WorksRequest wr = worksRequestDao.getById(id);
+        wr.setStatus("REFUSE");
+        worksRequestDao.updateWorksRequest(wr);
+        return new ModelAndView("redirect:/manager/works/requests");
+    }
     
+    @RequestMapping(value = {"/manager/works/requests"}, method = RequestMethod.GET)
+    public ModelAndView worksRequestsPage() {
+        return getMinModel(getAccount(), "works_requests");
+    }
+    
+    @RequestMapping(value = {"/manager/works/requests/view/{someID}"}, method = RequestMethod.GET)
+    public @ResponseBody ModelAndView worksRequestViewpage(@PathVariable(value="someID") int id) {
+        AccountManager account = getAccount();
+        WorksRequest r = worksRequestDao.getById(id);
+        
+        
+        
+        ModelAndView model = getMinModel(account, "works_request_view");
+        model.addObject("request", r);
+        return model;
+    }
     
     
     

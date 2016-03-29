@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
-<t:template_owner2>
+<t:template_owner>
     <jsp:body>
 
 
@@ -47,4 +47,4 @@
             </div>
         </div>
     </jsp:body>
-</t:template_owner2>
+</t:template_owner>

@@ -49,6 +49,6 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     @Transactional
     public void updateAccount(Account account) {
-        sessionFactory.getCurrentSession().saveOrUpdate(account);
+        sessionFactory.getCurrentSession().update(account);
     }
 }

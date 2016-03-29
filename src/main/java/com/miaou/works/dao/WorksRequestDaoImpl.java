@@ -1,5 +1,6 @@
 package com.miaou.works.dao;
 
+import com.miaou.news.model.News;
 import com.miaou.users.dao.*;
 import com.miaou.users.model.AccountOwner;
 import com.miaou.works.model.WorksRequest;
@@ -28,6 +29,18 @@ public class WorksRequestDaoImpl implements WorksRequestDao {
     @Transactional
     public List<WorksRequest> getAll() {       
         return sessionFactory.getCurrentSession().createQuery("from WorksRequest").list();
+    }
+    
+    @Override
+    @Transactional
+    public WorksRequest getById(int id) {
+        List<WorksRequest> worksRequest = new ArrayList<WorksRequest>();
+        worksRequest = sessionFactory.getCurrentSession().createQuery("from WorksRequest where id=?").setParameter(0, id).list();
+        if (worksRequest.size() > 0) {
+            return worksRequest.get(0);
+        } else {
+            return null;
+        }
     }
     
     @Override

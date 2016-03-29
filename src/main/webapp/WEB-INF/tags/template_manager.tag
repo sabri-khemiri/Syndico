@@ -56,10 +56,13 @@
                             <a  href="${pageContext.request.contextPath}/manager/message"><i class="fa fa-envelope-o"></i> <span class="nav-label">Message</span></a>
                         </li>
                         <li>
+                            <a href="${pageContext.request.contextPath}/manager/works/requests"><i class="fa fa-question"></i> <span class="nav-label">Travaux</span></a>
+                        </li>
+                        <li>
                             <a href="${pageContext.request.contextPath}/manager/news/add"><i class="fa fa-comments-o"></i> <span class="nav-label">Annonce General</span></a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-user"></i> <span class="nav-label">Mon profil</span></a>
+                            <a href="${pageContext.request.contextPath}/manager/profil"><i class="fa fa-user"></i> <span class="nav-label">Mon profil</span></a>
                         </li>                        
                         <li>
                             <a href=""><i class="fa fa-question"></i> <span class="nav-label">Aide</span></a>

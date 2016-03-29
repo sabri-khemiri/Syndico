@@ -59,8 +59,11 @@
                             <a href="${pageContext.request.contextPath}/trust/news/add"><i class="fa fa-comments-o"></i> <span class="nav-label">Annonce General</span></a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-user"></i> <span class="nav-label">Mon profil</span></a>
-                        </li>                        
+                            <a href="${pageContext.request.contextPath}/trust/profil"><i class="fa fa-user"></i> <span class="nav-label">Mon profil</span></a>
+                        </li>   
+                        <li>
+                            <a href="${pageContext.request.contextPath}/trust/syndic/profil"><i class="fa fa-user"></i> <span class="nav-label">Syndic profil</span></a>
+                        </li>  
                         <li>
                             <a href=""><i class="fa fa-question"></i> <span class="nav-label">Aide</span></a>
                         </li>

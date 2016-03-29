@@ -7,10 +7,14 @@ import com.miaou.news.dao.NewsDao;
 import com.miaou.news.model.News;
 import com.miaou.news.model.NewsType;
 import com.miaou.trust.dao.CoOwnershipDao;
+import com.miaou.trust.dao.TrustDao;
+import com.miaou.trust.form.AccountFormValidator;
 import com.miaou.trust.form.CoOwnershipFormValidator;
 import com.miaou.trust.form.MessageFormValidato;
 import com.miaou.trust.form.NewsFormValidator;
+import com.miaou.trust.form.TrustFormValidator;
 import com.miaou.trust.model.CoOwnership;
+import com.miaou.trust.model.Trust;
 import com.miaou.users.dao.AccountDao;
 import com.miaou.users.model.Account;
 import com.miaou.users.model.AccountManager;
@@ -44,6 +48,9 @@ public class TrustController {
     
     @Autowired
     private NewsDao newsDao;
+    
+    @Autowired
+    private TrustDao trustDao;
 
     @RequestMapping(value = {"/trust**"}, method = RequestMethod.GET)
     public ModelAndView homeTrustPage() {
@@ -295,6 +302,69 @@ public class TrustController {
                 model.addObject("list", listCoOwnership);
                 model.addObject("news", news);
                 return model;
+        }
+    }
+    
+    @RequestMapping(value = {"/trust/profil"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView profilPage(Account faccount, BindingResult result, HttpServletRequest request) {
+        AccountTrust account = getAccount();
+
+        if (request.getMethod() == "POST") {
+            AccountFormValidator fv = new AccountFormValidator();
+            fv.validate(faccount, result);
+
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "profil");
+                model.addObject("errors", result);
+                model.addObject("faccount", faccount);
+                return model;
+            } else {
+                account.setEmail(faccount.getEmail());
+                account.setFirstName(faccount.getFirstName());
+                account.setLastName(faccount.getLastName());
+                accountDao.updateAccount(account);
+                
+                return new ModelAndView("redirect:/trust/profil");
+            }
+        } else {
+            ModelAndView model = getMinModel(account, "profil");
+            model.addObject("faccount", account);
+            return model;
+        }
+    }
+    
+    @RequestMapping(value = {"/trust/syndic/profil"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView syndicProfilPage(Trust newTrust, BindingResult result, HttpServletRequest request) {
+        AccountTrust account = getAccount();
+
+        if (request.getMethod() == "POST") {
+            TrustFormValidator fv = new TrustFormValidator();
+            fv.validate(newTrust, result);
+
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "profil_syndic");
+                model.addObject("errors", result);
+                model.addObject("newTrust", newTrust);
+                return model;
+            } else {
+                Trust t = trustDao.getByName(account.getTrust().getName());
+                t.setName(newTrust.getName());
+                t.setAddress(newTrust.getAddress());
+                t.setDescription(newTrust.getDescription());
+                t.setPhone(newTrust.getPhone());
+                t.setEmail(newTrust.getEmail());
+                t.setLegalInfomation(newTrust.getLegalInfomation());
+                t.setWebsite(newTrust.getWebsite());
+                t.setFax(newTrust.getFax());
+                
+                trustDao.updateTrust(t);
+                
+                return new ModelAndView("redirect:/trust");
+            }
+        } else {
+            ModelAndView model = getMinModel(account, "profil_syndic");
+            model.addObject("newTrust", account.getTrust());
+            return model;
         }
     }
     

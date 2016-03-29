@@ -32,7 +32,7 @@ public class Account implements Serializable {
     protected int id;
     protected String username;
     protected String password;
-    protected boolean enabled = true;
+    protected boolean enabled = false;
     
     protected String email;
     protected String firstName;

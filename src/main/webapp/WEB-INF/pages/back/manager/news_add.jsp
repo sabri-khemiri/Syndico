@@ -3,7 +3,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
-<t:template_trust>
+<t:template_manager>
     <jsp:attribute name="title">Nouvelle Annonce</jsp:attribute>
 
     <jsp:body>
@@ -50,4 +50,4 @@
             </div>
         </div>
     </jsp:body>
-</t:template_trust>
+</t:template_manager>

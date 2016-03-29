@@ -13,6 +13,7 @@ import com.miaou.news.model.NewComment;
 import com.miaou.news.model.News;
 import com.miaou.trust.dao.CoOwnershipDao;
 import com.miaou.trust.dao.TrustDao;
+import com.miaou.trust.form.AccountFormValidator;
 import com.miaou.trust.form.CoOwnershipFormValidator;
 import com.miaou.trust.form.MessageFormValidato;
 import com.miaou.trust.form.MettingFormValidato;
@@ -127,7 +128,7 @@ public class OwnerController {
             WorksRequestFormValidator fv = new WorksRequestFormValidator();
             fv.validate(wr, result);
             if (result.hasErrors()) {
-                ModelAndView model = getMinModel(account, "works_request_add");
+                ModelAndView model = getMinModel(account, "add_works_request");
                 model.addObject("errors", result);
                 model.addObject("worksRequest", wr);
                 return model;
@@ -141,7 +142,7 @@ public class OwnerController {
             }
         } 
         else {
-            ModelAndView model = getMinModel(account, "\"works_request_add\"");
+            ModelAndView model = getMinModel(account, "add_works_request");
             model.addObject("worksRequest", new WorksRequest());
             return model;
         }
@@ -221,7 +222,7 @@ public class OwnerController {
                 message.setStatus(MessageStatus.NON_LU);
                 message.setSender(account);
                 messageDao.addMessage(message);
-                return new ModelAndView("redirect:/manager/message");
+                return new ModelAndView("redirect:/owner/message");
             }
         } 
         else {
@@ -245,6 +246,34 @@ public class OwnerController {
     /**************************************************************************/
     /***************************FIN DES PAGES MESSAGE**************************/
 
+    @RequestMapping(value = {"/owner/profil"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView profilPage(Account faccount, BindingResult result, HttpServletRequest request) {
+        AccountOwner account = getAccount();
+
+        if (request.getMethod() == "POST") {
+            AccountFormValidator fv = new AccountFormValidator();
+            fv.validate(faccount, result);
+
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "profil");
+                model.addObject("errors", result);
+                model.addObject("faccount", faccount);
+                return model;
+            } else {
+                account.setEmail(faccount.getEmail());
+                account.setFirstName(faccount.getFirstName());
+                account.setLastName(faccount.getLastName());
+                accountDao.updateAccount(account);
+                
+                return new ModelAndView("redirect:/owner/profil");
+            }
+        } else {
+            ModelAndView model = getMinModel(account, "profil");
+            model.addObject("faccount", account);
+            return model;
+        }
+    }
+    
     private ModelAndView getMinModel(AccountOwner account){
         ModelAndView model = new ModelAndView();
         model.addObject("account", account);

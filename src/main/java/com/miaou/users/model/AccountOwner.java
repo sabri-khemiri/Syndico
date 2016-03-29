@@ -2,6 +2,7 @@ package com.miaou.users.model;
 
 import com.miaou.meeting.model.Resolution;
 import com.miaou.trust.model.CoOwnership;
+import com.miaou.works.model.WorksRequest;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -24,6 +25,8 @@ public class AccountOwner extends Account {
     
     private CoOwnership coOwnership;
     private Set<Resolution> resolutions = new HashSet<Resolution>();
+    private Set<WorksRequest> worksRequests = new HashSet<WorksRequest>();
+
     
     public AccountOwner(){
         super();
@@ -72,6 +75,23 @@ public class AccountOwner extends Account {
     
     public void removeResolution(Resolution r) {
         this.resolutions.remove(r);
+    }
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+    public Set<WorksRequest> getWorksRequests() {
+        return worksRequests;
+    }
+
+    public void setWorksRequests(Set<WorksRequest> worksRequests) {
+        this.worksRequests = worksRequests;
+    }
+        
+    public void addWorksRequests(WorksRequest worksRequests) {
+        this.worksRequests.add(worksRequests);
+    }
+    
+    public void removeWorksRequests(WorksRequest worksRequests) {
+        this.worksRequests.remove(worksRequests);
     }
     
     @Transient

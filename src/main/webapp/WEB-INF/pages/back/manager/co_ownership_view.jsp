@@ -64,7 +64,7 @@
                                 <img alt="image" class="img-responsive" src="${pageContext.request.contextPath}/resources/images/co_ownership/${coOwnership.id}${coOwnership.image}">
                             </div>
                             <div class="ibox-content profile-content">
-                                <h4><strong>${coOwnership.name}</strong></h4>
+                                <h4><strong>${coOwnership.name}</strong>   <a href="${pageContext.request.contextPath}/manager/co_ownership/update/"><i class="fa fa-edit"></i></a></h4> 
                                 <ul class="list-group clear-list">
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${coOwnership.address} </span>
@@ -323,5 +323,7 @@
                         </div>
                     </div>
                 </div>
-            </jsp:body>
-        </t:template_manager>
+            </div>
+        </div>
+    </jsp:body>
+</t:template_manager>
