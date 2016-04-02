@@ -47,7 +47,7 @@ public class MeetingDaoImpl implements MeetingDao {
     @Transactional
     public Meeting getById(int id) {
         List<Meeting> meeting = new ArrayList<Meeting>();
-        meeting = sessionFactory.getCurrentSession().createQuery("from NewComment where id=?").setParameter(0, id).list();
+        meeting = sessionFactory.getCurrentSession().createQuery("from Meeting where id=?").setParameter(0, id).list();
         if (meeting.size() > 0) {
             return meeting.get(0);
         } else {

@@ -12,6 +12,7 @@ import com.miaou.trust.dao.CoOwnershipDao;
 import com.miaou.trust.dao.TrustDao;
 import com.miaou.trust.form.AccountFormValidator;
 import com.miaou.trust.form.CoOwnershipFormValidator;
+import com.miaou.trust.form.MeetingCloseFormValidator;
 import com.miaou.trust.form.MessageFormValidato;
 import com.miaou.trust.form.MettingFormValidato;
 import com.miaou.trust.form.NewsFormValidator;
@@ -25,6 +26,7 @@ import com.miaou.works.dao.WorksDao;
 import com.miaou.works.dao.WorksRequestDao;
 import com.miaou.works.model.WorksRequest;
 import com.miaou.works.model.WorksSmall;
+import java.io.File;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -37,7 +39,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -173,7 +177,34 @@ public class ManagerController {
         }
     }
     
-   
+    @RequestMapping(value = {"/manager/meeting/update/{id}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody ModelAndView updateMeetingPage(Meeting meeting, BindingResult result, HttpServletRequest request, @PathVariable(value="id") int id) {
+        AccountManager account = getAccount();
+        
+        if (request.getMethod() == "POST") {
+            MettingFormValidato fv = new MettingFormValidato();
+            fv.validate(meeting, result);
+
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "meeting_add");
+                model.addObject("errors", result);
+                model.addObject("meeting", meeting);
+                return model;
+            } 
+            else {
+                meeting.setCoOwnership(account.getCoOwnership());
+                meetingDao.updateMeeting(meeting);
+                
+                return new ModelAndView("redirect:/manager/co_ownership");
+            }
+        } 
+        else {
+            ModelAndView model = getMinModel(account, "meeting_add");
+            meeting = meetingDao.getById(id);
+            model.addObject("meeting",meeting);
+            return model;
+        }
+    }
     
     /**************************************************************************/
     /**************************DEBUT DES PAGES MESSAGE*************************/
@@ -427,6 +458,51 @@ public class ManagerController {
         return model;
     }
     
+    @RequestMapping(value = {"/manager/meeting/close/{someID}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody ModelAndView meetingViewpage(Meeting meeting, BindingResult result, HttpServletRequest request, @PathVariable(value="someID") int id) {
+          AccountManager account = getAccount();
+        
+        if (request.getMethod() == "POST") {
+            MeetingCloseFormValidator fv = new MeetingCloseFormValidator();
+            fv.validate(meeting, result);
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "meeting_close");
+                model.addObject("errors", result);
+                model.addObject("meeting", meeting);
+                return model;
+            } 
+            else {
+                Meeting tmp = meetingDao.getById(id);
+                
+                tmp.setReport(meeting.getReport());
+                meetingDao.updateMeeting(tmp);
+                
+                News news = new News();
+                news.setAccount(account);
+                news.setTitle("Rapport de l'AG du  : " + tmp.getMeetingDate());
+                news.setContents(tmp.getReport());
+                news.setType(NewsType.MEETING);
+                news.setImage("meeting.png");
+                news.setCoOwnership(account.getCoOwnership());
+
+                newsDao.addNews(news);
+                
+                return new ModelAndView("redirect:/manager/meeting");
+            }
+        } 
+        else {            
+            ModelAndView model = getMinModel(account, "meeting_close");
+            meeting = new Meeting();
+            model.addObject("meeting", meeting);
+            return model;
+        }
+    }
+    
+    @RequestMapping(value = {"/manager/meeting"}, method = RequestMethod.GET)
+    public ModelAndView meetingViewpage() {
+        return getMinModel(getAccount(), "meeting");
+    }
+    
     
     
     
@@ -449,6 +525,40 @@ public class ManagerController {
    } 
     
     
-    
-    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   	private String saveDirectory = "totogro/";
+	
+	@RequestMapping(value = {"/manager/uploadFile**"}, method = {RequestMethod.POST, RequestMethod.GET})
+	public String handleFileUpload(HttpServletRequest request, 
+			@RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
+		
+		System.out.println("description: " + request.getParameter("description"));
+		
+		if (fileUpload != null && fileUpload.length > 0) {
+			for (CommonsMultipartFile aFile : fileUpload){
+				
+				System.out.println("Saving file: " + aFile.getOriginalFilename());
+				
+				if (!aFile.getOriginalFilename().equals("")) {
+					aFile.transferTo(new File(saveDirectory + aFile.getOriginalFilename()));
+				}
+			}
+		}
+
+		// returns to the view "Result"
+		return "Result";
+	}
 }
+   
+   
+

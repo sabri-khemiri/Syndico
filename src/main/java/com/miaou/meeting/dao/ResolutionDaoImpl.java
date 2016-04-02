@@ -69,7 +69,7 @@ public class ResolutionDaoImpl implements ResolutionDao {
     @Override
     @Transactional
     public void addResolution(Resolution resolution) {
-        sessionFactory.getCurrentSession().persist(resolution);
+        sessionFactory.getCurrentSession().save(resolution);
     }
 
     @Override

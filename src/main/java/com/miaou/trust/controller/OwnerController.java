@@ -18,6 +18,7 @@ import com.miaou.trust.form.CoOwnershipFormValidator;
 import com.miaou.trust.form.MessageFormValidato;
 import com.miaou.trust.form.MettingFormValidato;
 import com.miaou.trust.form.NewsFormValidator;
+import com.miaou.trust.form.ResolutionFormValidator;
 import com.miaou.trust.form.WorksFormValidato;
 import com.miaou.trust.form.WorksRequestFormValidator;
 import com.miaou.trust.model.CoOwnership;
@@ -148,6 +149,47 @@ public class OwnerController {
         }
     }
 
+    
+    
+    
+    
+    @RequestMapping(value = {"owner/meeting/resolution/add/{id}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody ModelAndView updateMeetingPage(Resolution resolution, BindingResult result, HttpServletRequest request, @PathVariable(value="id") int id) {
+        AccountOwner account = getAccount();
+        
+        if (request.getMethod() == "POST") {
+            ResolutionFormValidator fv = new ResolutionFormValidator();
+            fv.validate(resolution, result);
+
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "resolution_add");
+                model.addObject("errors", result);
+                model.addObject("resolution", resolution);
+                return model;
+            } 
+            else {
+                resolution.setOwner(account);
+                resolution.setMeeting(meetingDao.getById(id));
+                resolutionDao.addResolution(resolution); 
+                return new ModelAndView("redirect:/owner/meeting");
+            }
+        } 
+        else {
+            ModelAndView model = getMinModel(account, "resolution_add");
+            resolution = new Resolution();
+            model.addObject("resolution",resolution);
+            return model;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @RequestMapping(value = {"/owner/meeting/resolution_add**"}, method = RequestMethod.POST)
     public ModelAndView addResolutionPage(HttpServletRequest request) {
         AccountOwner account = getAccount();
@@ -272,6 +314,16 @@ public class OwnerController {
             model.addObject("faccount", account);
             return model;
         }
+    }
+    
+     @RequestMapping(value = {"/owner/works"}, method = RequestMethod.GET)
+    public ModelAndView worksPage() {
+        return getMinModel(getAccount(), "works");
+    }
+    
+    @RequestMapping(value = {"/owner/meeting"}, method = RequestMethod.GET)
+    public ModelAndView meetingPage() {
+        return getMinModel(getAccount(), "meeting");
     }
     
     private ModelAndView getMinModel(AccountOwner account){
