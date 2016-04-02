@@ -2,8 +2,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <t:template_trust>
-    <jsp:attribute name="title">Copropriétés</jsp:attribute>
+    <jsp:attribute name="title"><spring:message code="Toa.ownerShip"/></jsp:attribute>
 
     <jsp:attribute name="css">
         <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
@@ -34,13 +35,13 @@
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Copropriétés</h2>
+                <h2><spring:message code="Toa.ownerShip"/></h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="${pageContext.request.contextPath}/trust">Accueil</a>
+                        <a href="${pageContext.request.contextPath}/trust"><spring:message code="Toa.home"/></a>
                     </li>
                     <li class="active">
-                        <strong>Copropriétés</strong>
+                        <strong><spring:message code="Toa.ownerShip"/></strong>
                     </li>
                 </ol>
             </div>
@@ -53,24 +54,24 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Copropriétés</h5>
+                            <h5><spring:message code="Toa.ownerShip"/></h5>
                         </div>
                         <div class="ibox-content">
                             <span class="row">
                                 <a href="${pageContext.request.contextPath}/trust/co_ownership/add">
-                                    <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> Nouvelle copropriété</button>
+                                    <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> <spring:message code="Toa.newownerShip"/></button>
                                 </a>
                             </span>
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover dataCoOwnership" >
                                     <thead>
                                         <tr>
-                                            <th>Nom</th>
-                                            <th>Adresse</th>
-                                            <th>Date</th>
-                                            <th>Nb gestionaire</th>
-                                            <th>Copropriétaire</th>
-                                            <th>Option</th>
+                                            <th><spring:message code="Toa.name"/></th>
+                                            <th><spring:message code="Toa.adress"/></th>
+                                            <th><spring:message code="Toa.date"/></th>
+                                            <th><spring:message code="Toa.nbManager"/></th>
+                                            <th><spring:message code="Toa.coOwner"/></th>
+                                            <th><spring:message code="Toa.option"/></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -91,19 +92,19 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th>Nom</th>
-                                            <th>Adresse</th>
-                                            <th>Date</th>
-                                            <th>Nb gestionaire</th>
-                                            <th>Copropriétaire</th>
-                                            <th>Option</th>
+                                            <th><spring:message code="Toa.name"/></th>
+                                            <th><spring:message code="Toa.adresse"/></th>
+                                            <th><spring:message code="Toa.date"/></th>
+                                            <th><spring:message code="Toa.nbManager"/></th>
+                                            <th><spring:message code="Toa.coOwner"/></th>
+                                            <th><spring:message code="Toa.option"/></th>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
                             <span class="row">
                                 <a href="${pageContext.request.contextPath}/trust/co_ownership/add">
-                                    <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> Nouvelle copropriété</button>
+                                    <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> <spring:message code="Toa.newOwnerShip"/></button>
                                 </a>
                             </span>
                         </div>

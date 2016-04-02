@@ -35,8 +35,13 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/animate.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/line-icons/line-icons.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+        
+        <!-- CSS Page Style -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme_1/assets/css/pages/profile.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme_1/assets/css/pages/shortcode_timeline2.css">
 
         <!-- CSS Theme -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme_1/assets/css/theme-colors/default.css" id="style_color">
@@ -107,7 +112,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="${pageContext.request.contextPath}/owner/profil" class="dropdown-toggle" data-toggle="dropdown">
                                     Profil
                                 </a>
                             </li>
@@ -163,10 +168,15 @@
         <!-- JS Implementing Plugins -->
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/back-to-top.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/smoothScroll.js"></script>
+        <!--<script type="text/javascript" src="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/circles-master/circles.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	-->
         <!-- JS Customization -->
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/theme_1/assets/js/custom.js"></script>
         <!-- JS Page Level -->
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/theme_1/assets/js/app.js"></script>
+        <!--<script type="text/javascript" src="${pageContext.request.contextPath}/resources/theme_1/assets/js/plugins/datepicker.js"></script>-->
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/theme_1/assets/js/plugins/style-switcher.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/theme_1/assets/plugins/backstretch/jquery.backstretch.min.js"></script>
 

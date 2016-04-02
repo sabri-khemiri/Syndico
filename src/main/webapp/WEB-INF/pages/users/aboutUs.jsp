@@ -54,7 +54,7 @@
 		<!--=== Breadcrumbs ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">tAbout Us ${about.titre}</h1>
+				<h1 class="pull-left"><spring:message code="about.title"/></h1>
 			</div><!--/container-->
 		</div><!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
@@ -99,23 +99,23 @@
 				<div class="col-sm-4">
 					<div class="service-block service-block-default">
 						<i class="icon-custom rounded icon-color-dark icon-line icon-badge"></i>
-						<h2 class="heading-md"> ${about.coaireTitre}Copropriétaires </h2>
-                                                <p>${about.coaireText} Donec id elit non mi porta gravida at eget metus id elit mi egetine. Fusce dapibus. At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+						<h2 class="heading-md"><spring:message code="about.coaireTitle"/></h2>
+                                                <p><spring:message code="about.coaireText"/></p>
 					
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="service-block service-block-default">
 						<i class="icon-custom rounded icon-color-dark icon-line icon-fire"></i>
-						<h2 class="heading-md">${about.coeteTitre} Copropriété</h2>
-						<p>${about.coeteText}Donec id elit non mi porta gravida at eget metus id elit mi egetine. Fusce dapibus. At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+						<h2 class="heading-md"><spring:message code="about.coeteTitle"/></h2>
+						<p><spring:message code="about.coeteText"/></p>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="service-block service-block-default">
 						<i class="icon-custom rounded icon-color-dark icon-line icon-directions"></i>
-						<h2 class="heading-md">${about.syndicatTitre}Syndicat</h2>
-						<p>${about.syndicatText} Donec id elit non mi porta gravida at eget metus id elit mi egetine. Fusce dapibus. At vero eos et accusamus et iusto odio dignissimos ducimus qui.</p>
+						<h2 class="heading-md"><spring:message code="about.SyndicatTitle"/></h2>
+						<p><spring:message code="about.SyndicatText"/></p>
 					</div>
 				</div>
 			</div>
@@ -126,7 +126,7 @@
 		<div class="parallax-bg parallaxBg1">
 			<div class="container content parallax-about">
 				<div class="title-box-v2">
-					<h2>${about.aPropos} Á propos<span class="color-green"> du site</span></h2>
+					<h2><spring:message code="about.aPropos"/></h2>
 					
 				</div>
 
@@ -135,15 +135,15 @@
 						<div class="banner-info dark margin-bottom-10">
 							<i class="rounded-x fa fa-magic"></i>
 							<div class="overflow-h">
-								<h3>${about.but} Notre but</h3>
-								<p>${about.butText} Ce site est un projet étudiant qui doit mettre en relation des copropriètaires et des copropriétés. Phasellus vitae rhoncus ipsum. Aliquam ultricies. </p>
+								<h3><spring:message code="about.but"/></h3>
+								<p><spring:message code="about.butText"/></p>
 							</div>
 						</div>
 						<div class="banner-info dark margin-bottom-10">
 							<i class="rounded-x fa fa-magic"></i>
 							<div class="overflow-h">
-								<h3>${about.vision} Notre vision</h3>
-								<p>${about.visionText} Phasellus vitae rhoncus ipsum. Aliquam ultricies, velit sit amet scelerisque tincidunt, dolor neque consequat est, a dictum felis metus eget nulla.</p>
+								<h3><spring:message code="about.vision"/></h3>
+								<p><spring:message code="about.visionText"/></p>
 							</div>
 						</div>
 						

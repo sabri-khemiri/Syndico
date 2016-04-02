@@ -38,13 +38,13 @@
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Copropriété : ${coOwnership.name}</h2>
+                <h2><spring:message code="McoView.ownerShip"/> ${coOwnership.name}</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="${pageContext.request.contextPath}/manager">Accueil</a>
+                        <a href="${pageContext.request.contextPath}/manager"><spring:message code="McoView.home"/></a>
                     </li>
                     <li class="active">
-                        <strong>Copropriété</strong>
+                        <strong><spring:message code="McoView.ownerShip"/></strong>
                     </li>
                 </ol>
             </div>
@@ -57,7 +57,7 @@
                 <div class="col-lg-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Détail</h5>
+                            <h5><spring:message code="McoView.Détail"/></h5>
                         </div>
                         <div>
                             <div class="ibox-content no-padding border-left-right">
@@ -68,14 +68,14 @@
                                 <ul class="list-group clear-list">
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${coOwnership.address} </span>
-                                        Adresse
+                                        <spring:message code="McoView.adress"/>
                                     </li>
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${coOwnership.creationDate} </span>
-                                        Date de création
+                                        <spring:message code="McoView.date"/>
                                     </li>
                                     <li class="list-group-item fist-item">
-                                        Description : <br/><br/>
+                                        <spring:message code="McoView.text"/> : <br/><br/>
                                         <span class=""> ${coOwnership.description} </span>
 
                                     </li>
@@ -86,28 +86,28 @@
                 </div>
                 <div class="tabs-container col-lg-8">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-1"> Copropriétaire</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-2"> Gestionnaire</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-3"> Assemblé Générale</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-4"> Travaux</a></li>
+                        <li class="active"><a data-toggle="tab" href="#tab-1"> <spring:message code="McoView.coOwner"/></a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-2"> <spring:message code="McoView.manager"/></a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-3"> <spring:message code="McoView.meeting"/></a></li>
+                        <li class=""><a data-toggle="tab" href="#tab-4"> <spring:message code="McoView.work"/></a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
                             <div class="panel-body">
                                 <span class="row">
-                                    <button class="btn btn-success btn-outline pull-right" data-toggle="modal" data-target="#addowner"><i class="fa fa-plus"></i> Nouvelle copropriétaire</button>
+                                    <button class="btn btn-success btn-outline pull-right" data-toggle="modal" data-target="#addowner"><i class="fa fa-plus"></i> <spring:message code="McoView.newCoOwner"/></button>
                                 </span>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover dataCoOwnership" >
                                         <thead>
                                             <tr>
-                                                <th>Identifiant</th>
-                                                <th>Prenom</th>
-                                                <th>Nom</th>
-                                                <th>Email</th>
-                                                <th>Date Creation</th>
-                                                <th>Etat</th>
-                                                <th>Option</th>
+                                                <th><spring:message code="McoView.id"/></th>
+                                                <th><spring:message code="McoView.firstName"/></th>
+                                                <th><spring:message code="McoView.name"/></th>
+                                                <th><spring:message code="McoView.mail"/></th>
+                                                <th><spring:message code="McoView.date"/></th>
+                                                <th><spring:message code="McoView.state"/></th>
+                                                <th><spring:message code="McoView.option"/></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -128,38 +128,38 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Identifiant</th>
-                                                <th>Prenom</th>
-                                                <th>Nom</th>
-                                                <th>Email</th>
-                                                <th>Date Creation</th>
-                                                <th>Etat</th>
-                                                <th>Option</th>
+                                                <th><spring:message code="McoView.id"/></th>
+                                                <th><spring:message code="McoView.firstName"/></th>
+                                                <th><spring:message code="McoView.name"/></th>
+                                                <th><spring:message code="McoView.mail"/></th>
+                                                <th><spring:message code="McoView.date"/></th>
+                                                <th><spring:message code="McoView.state"/></th>
+                                                <th><spring:message code="McoView.option"/></th>
                                             </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                                 <span class="row">
-                                    <button class="btn btn-success btn-outline pull-right" data-toggle="modal" data-target="#addowner"><i class="fa fa-plus"></i> Nouvelle copropriétaire</button>
+                                    <button class="btn btn-success btn-outline pull-right" data-toggle="modal" data-target="#addowner"><i class="fa fa-plus"></i> <spring:message code="McoView.newCoOwner"/></button>
                                 </span>
                                 <div class="modal inmodal" id="addowner" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content animated bounceInDown">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span></button>
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><spring:message code="McoView.close"/></span></button>
                                                 <i class="fa fa-building-o modal-icon"></i>
-                                                <h4 class="modal-title">Ajoût de nouveau copropriétaire</h4>
+                                                <h4 class="modal-title"><spring:message code="McoView.insertCoOwner"/></h4>
                                             </div>
                                             <form action="${pageContext.request.contextPath}/manager/owner/add" method="POST">
                                                 <div class="modal-body text-center">
-                                                    <label class="control-label">Nombre de nouveau copropriétaire</label><br/>
+                                                    <label class="control-label"><spring:message code="McoView.nbCoOwner"/></label><br/>
                                                     <input type="text" name="nbAccount" value="0" class="dial m-r" data-fgColor="#ED5565" data-width="85" data-height="85" data-max="500" />
                                                     <input type="hidden" name="idCownership" value="${coOwnership.id}"/>
                                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-white" data-dismiss="modal">Fermer</button>
-                                                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal"><spring:message code="McoView.close"/></button>
+                                                    <button type="submit" class="btn btn-primary"><spring:message code="McoView.send"/></button>
                                                 </div>
                                             </form>
                                         </div>
@@ -173,13 +173,13 @@
                                     <table class="table table-striped table-bordered table-hover dataCoOwnership" >
                                         <thead>
                                             <tr>
-                                                <th>Identifiant</th>
-                                                <th>Prenom</th>
-                                                <th>Nom</th>
-                                                <th>Email</th>
-                                                <th>Date Creation</th>
-                                                <th>Etat</th>
-                                                <th>Option</th>
+                                                <th><spring:message code="McoView.id"/></th>
+                                                <th><spring:message code="McoView.firstName"/></th>
+                                                <th><spring:message code="McoView.name"/></th>
+                                                <th><spring:message code="McoView.mail"/></th>
+                                                <th><spring:message code="McoView.date"/></th>
+                                                <th><spring:message code="McoView.state"/></th>
+                                                <th><spring:message code="McoView.option"/></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -200,13 +200,13 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Identifiant</th>
-                                                <th>Prenom</th>
-                                                <th>Nom</th>
-                                                <th>Email</th>
-                                                <th>Date Creation</th>
-                                                <th>Etat</th>
-                                                <th>Option</th>
+                                                <th><spring:message code="McoView.id"/></th>
+                                                <th><spring:message code="McoView.firstName"/></th>
+                                                <th><spring:message code="McoView.name"/></th>
+                                                <th><spring:message code="McoView.mail"/></th>
+                                                <th><spring:message code="McoView.date"/></th>
+                                                <th><spring:message code="McoView.state"/></th>
+                                                <th><spring:message code="McoView.option"/></th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -217,19 +217,19 @@
                             <div class="panel-body">
                                 <span class="row">
                                     <a href="${pageContext.request.contextPath}/manager/meeting/add">
-                                        <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> Nouvelle assemblé générale</button>
+                                        <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> <spring:message code="McoView.newMeeting"/></button>
                                     </a>
                                 </span>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover dataCoOwnership" >
                                         <thead>
                                             <tr>
-                                                <th>Date</th>
-                                                <th>Description</th>
-                                                <th>Fichier</th>
-                                                <th>Résolution</th>
-                                                <th>Etat</th>
-                                                <th>Option</th>
+                                                <th><spring:message code="McoView.date"/></th>
+                                                <th><spring:message code="McoView.text"/></th>
+                                                <th><spring:message code="McoView.file"/></th>
+                                                <th><spring:message code="McoView.résolution"/></th>
+                                                <th><spring:message code="McoView.state"/></th>
+                                                <th><spring:message code="McoView.option"/></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -249,19 +249,19 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Date</th>
-                                                <th>Description</th>
-                                                <th>Fichier</th>
-                                                <th>Résolution</th>
-                                                <th>Etat</th>
-                                                <th>Option</th>
+                                                <th><spring:message code="McoView.date"/></th>
+                                                <th><spring:message code="McoView.texte"/></th>
+                                                <th><spring:message code="McoView.file"/></th>
+                                                <th><spring:message code="McoView.reso"/></th>
+                                                <th><spring:message code="McoView.state"/></th>
+                                                <th><spring:message code="McoView.option"/></th>
                                             </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                                 <span class="row">
                                     <a href="${pageContext.request.contextPath}/manager/meeting/add">
-                                        <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> Nouvelle assemblé générale</button>
+                                        <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i><spring:message code="McoView.newMeeting"/></button>
                                     </a>
                                 </span>
                             </div>
@@ -270,20 +270,20 @@
                             <div class="panel-body">
                                 <span class="row">
                                     <a href="${pageContext.request.contextPath}/manager/works/add">
-                                        <button class="btn btn-success btn-outline pull-right" ><i class="fa fa-plus"></i> Nouveaux travaux</button>
+                                        <button class="btn btn-success btn-outline pull-right" ><i class="fa fa-plus"></i> <spring:message code="McoView.newWork"/></button>
                                     </a>
                                 </span>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover dataCoOwnership" >
                                         <thead>
                                             <tr>
-                                                <th>Date Debut</th>
-                                                <th>Date Fin</th>
-                                                <th>Type</th>
-                                                <th>Titre</th>
-                                                <th>Description</th>
-                                                <th>Etat</th>
-                                                <th>Option</th>
+                                                <th><spring:message code="McoView.begin"/></th>
+                                                <th><spring:message code="McoView.end"/></th>
+                                                <th><spring:message code="McoView.type"/></th>
+                                                <th><spring:message code="McoView.title"/></th>
+                                                <th><spring:message code="McoView.text"/></th>
+                                                <th><spring:message code="McoView.state"/></th>
+                                                <th><spring:message code="McoView.option"/></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -291,10 +291,10 @@
                                                 <tr class="gradeX">
                                                     <td>${work.startDate}</td>
                                                     <td>${work.endDate}</td>
-                                                    <td>Petit</td>
+                                                    <td><spring:message code="McoView.little"/></td>
                                                     <td>${work.title}</td>
                                                     <td>${work.contents}</td>
-                                                    <td>En cours</td>
+                                                    <td><spring:message code="McoView.progress"/></td>
                                                     <td>
                                                         <a><i class="fa fa-edit"></i></a>
                                                         <a><i class="fa fa-trash"></i></a>
@@ -304,19 +304,19 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Date</th>
-                                                <th>Description</th>
-                                                <th>Fichier</th>
-                                                <th>Résolution</th>
-                                                <th>Etat</th>
-                                                <th>Option</th>
+                                                <th><spring:message code="McoView.date"/></th>
+                                                <th><spring:message code="McoView.text"/></th>
+                                                <th><spring:message code="McoView.file"/></th>
+                                                <th><spring:message code="McoView.resolution"/></th>
+                                                <th><spring:message code="McoView.state"/></th>
+                                                <th><spring:message code="McoView.option"/></th>
                                             </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                                 <span class="row">
                                     <a href="${pageContext.request.contextPath}/manager/works/add">
-                                        <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> Nouveau travaux</button>
+                                        <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> <spring:message code="McoView.newWork"/></button>
                                     </a>
                                 </span>
                             </div>

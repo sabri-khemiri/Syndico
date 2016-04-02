@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template_owner>
     <jsp:body>
@@ -9,8 +10,8 @@
 
         <div class="breadcrumbs-v1" style="background-image: url('${pageContext.request.contextPath}/resources/images/login/login_bg_2.jpg')">
             <div class="container">
-                <span>Bienvenue</span>
-                <h1>Copropriété ${coOwnership.name}</h1>
+                <span><spring:message code="owner.welcome"/></span>
+                <h1><spring:message code="owner.ownerShip"/> ${coOwnership.name}</h1>
             </div>
         </div>
         <div class="container content-md">
@@ -24,7 +25,7 @@
                     <div class="col-sm-7">
                         <div class="news-v3">
                             <ul class="list-inline posted-info">
-                                <li>Par ${news.account.firstName} ${news.account.lastName} / ${news.creationDate}</li>
+                                <li><spring:message code="owner.by"/> ${news.account.firstName} ${news.account.lastName} <spring:message code="owner.slash"/> ${news.creationDate}</li>
                             </ul>
                             <h2><a href="#">${news.title}</a></h2>
                             <p>${news.contents}</p>
@@ -46,7 +47,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                <h4 id="myLargeModalLabel2" class="modal-title">Commentaire</h4>
+                                <h4 id="myLargeModalLabel2" class="modal-title"><spring:message code="owner.comm"/></h4>
                             </div>
                             <div class="modal-body">
                                 <c:forEach var="comment" items="${news.comments}">
@@ -69,7 +70,7 @@
 
                                 <div class="row">
                                     <form action="owner/add_comment" method="POST" class="sky-form">
-                                        <h3 class="col-md-offset-1">Ajout d'un nouveau commentaire</h3>
+                                        <h3 class="col-md-offset-1"><spring:message code="owner.newComm"/></h3>
                                         <fieldset>
                                             <div class='row'>
                                                 <textarea class="col-md-10 col-md-offset-1" name="contents" rows="3"></textarea>
@@ -78,7 +79,7 @@
                                             <div class='row text-center'>
                                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                                 <input type="hidden" name="idNew" value="${news.id}"/>
-                                                <button type="submit" class="btn-u">Submit</button>
+                                                <button type="submit" class="btn-u"><spring:message code="owner.send"/></button>
                                             </div>
                                         </fieldset>
                                     </form>
@@ -93,8 +94,8 @@
 
             <!-- Pager v3 -->
             <ul class="pager pager-v3 pager-md no-margin-bottom">
-                <li class="previous"><a href="#">&larr; Précédent</a></li>
-                <li class="next"><a href="#">Suivant &rarr;</a></li>
+                <li class="previous"><a href="#">&larr; <spring:message code="owner.previous"/></a></li>
+                <li class="next"><a href="#"><spring:message code="owner.next"/> &rarr;</a></li>
             </ul>
             <!-- End Pager v3 -->
         </div><!--/end container-->
