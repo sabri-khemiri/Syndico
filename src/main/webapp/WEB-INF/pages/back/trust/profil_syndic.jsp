@@ -2,7 +2,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template_trust>
     <jsp:attribute name="title">${account.username}</jsp:attribute>
@@ -39,13 +40,13 @@
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Profile Syndic : ${trust.name}</h2>
+                <h2><spring:message code="Tps.syndic"/>${trust.name}</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="${pageContext.request.contextPath}/manager">Accueil</a>
+                        <a href="${pageContext.request.contextPath}/manager"><spring:message code="Tps.home"/></a>
                     </li>
                     <li class="active">
-                        <strong>Profile Syndic</strong>
+                        <strong><spring:message code="Tps.syndic"/></strong>
                     </li>
                 </ol>
             </div>
@@ -58,7 +59,7 @@
                 <div class="col-lg-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Détail</h5>
+                            <h5><spring:message code="Tps.detail"/></h5>
                         </div>
                         <div>
                             <div class="ibox-content no-padding border-left-right">
@@ -69,35 +70,35 @@
                                 <ul class="list-group clear-list">
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${account.trust.address} </span>
-                                        Adresse
+                                        <spring:message code="Tps.adress"/>
                                     </li>
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${account.trust.email} </span>
-                                        Email
+                                        <spring:message code="Tps.mail"/>
                                     </li>
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${account.trust.phone} </span>
-                                        Telephone
+                                        <spring:message code="Tps.phone"/>
                                     </li>
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${account.trust.fax} </span>
-                                        Fax
+                                        <spring:message code="Tps.fax"/>
                                     </li>
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${account.trust.website} </span>
-                                        Site web
+                                        <spring:message code="Tps.web"/>
                                     </li>
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${account.trust.description} </span>
-                                        Description
+                                        <spring:message code="Tps.text"/>
                                     </li>
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${account.trust.legalInfomation} </span>
-                                        Infomation Legale
+                                        <spring:message code="Tps.legal"/>
                                     </li>
                                     <li class="list-group-item fist-item">
                                         <span class="pull-right"> ${account.trust.creationDate} </span>
-                                        Date de création
+                                        <spring:message code="Tps.create"/>
                                     </li>
                                 </ul>
                             </div>
@@ -106,32 +107,32 @@
                 </div>
                 <div class="tabs-container col-lg-8">
                     <form:form role="form"  action="" commandName="newTrust" method="POST" class="">  
-                        <div class="form-group"><label class="control-label">Nom</label> <small class="text-danger"><form:errors path="name"/></small>
+                        <div class="form-group"><label class="control-label"><spring:message code="Tps.name"/></label> <small class="text-danger"><form:errors path="name"/></small>
                             <div class="${errors.hasFieldErrors('name') ? 'has-error' : ''}"><form:input class="form-control" path="name" value="${trust.name}" /></div>
                         </div>
-                        <div class="form-group"><label class="control-label">Email</label> <small class="text-danger"><form:errors path="email"/></small>
+                        <div class="form-group"><label class="control-label"><spring:message code="Tps.mail"/></label> <small class="text-danger"><form:errors path="email"/></small>
                             <div class="${errors.hasFieldErrors('email') ? 'has-error' : ''}"><form:input class="form-control" path="email" value="${trust.email}" /></div>
                         </div>
-                        <div class="form-group"><label class="control-label">Adresse</label> <small class="text-danger"><form:errors path="address"/></small>
+                        <div class="form-group"><label class="control-label"><spring:message code="Tps.adress"/></label> <small class="text-danger"><form:errors path="address"/></small>
                             <div class="${errors.hasFieldErrors('address') ? 'has-error' : ''}"><form:input class="form-control" path="address" value="${trust.address}" /></div>
                         </div>
-                        <div class="form-group"><label class="control-label">Telephone</label>
+                        <div class="form-group"><label class="control-label"><spring:message code="Tps.phone"/></label>
                             <div class=""><form:input class="form-control" path="phone" value="${trust.phone}" /></div>
                         </div>
-                        <div class="form-group"><label class="control-label">Fax</label>
+                        <div class="form-group"><label class="control-label"><spring:message code="Tps.fax"/></label>
                             <div class=""><form:input class="form-control" path="fax" value="${trust.fax}" /></div>
                         </div>
-                        <div class="form-group"><label class="control-label">Site web</label>
+                        <div class="form-group"><label class="control-label"><spring:message code="Tps.web"/></label>
                             <div class=""><form:input class="form-control" path="website" value="${trust.website}" /></div>
                         </div>
-                        <div class="form-group"><label class="control-label">Description</label>
+                        <div class="form-group"><label class="control-label"><spring:message code="Tps.text"/></label>
                             <div class=""><form:textarea class="form-control" path="description" value="${trust.description}" /></div>
                         </div>
-                        <div class="form-group"><label class="control-label">Information legal</label>
+                        <div class="form-group"><label class="control-label"><spring:message code="Tps.legal"/></label>
                             <div class=""><form:textarea class="form-control" path="legalInfomation" value="${trust.legalInfomation}" /></div>
                         </div>
                         <div>
-                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Valider</strong></button>
+                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong><spring:message code="Tps.valid"/></strong></button>
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form:form>

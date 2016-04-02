@@ -1,53 +1,54 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template_trust>
     <jsp:body>
         <div class="row  border-bottom white-bg dashboard-header">
-            <h2>Bienvenue ${user.username}</h2>
+            <h2><spring:message code="Trust.welcome"/> ${user.username}</h2>
         </div>
         <div class="row">
             <div class="col-lg-3 col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-success pull-right">Monthly</span>
-                        <h5>Requette</h5>
+                        <span class="label label-success pull-right"><spring:message code="Trust.monthly"/></span>
+                        <h5><spring:message code="Trust.request"/></h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">201</h1>
+                        <h1 class="no-margins"><spring:message code="Trust.201"/></h1>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-success pull-right">Monthly</span>
-                        <h5>Requette</h5>
+                        <span class="label label-success pull-right"><spring:message code="Trust.monthly"/></span>
+                        <h5><spring:message code="Trust.request"/></h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">201</h1>
+                        <h1 class="no-margins"><spring:message code="Trust.201"/></h1>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-success pull-right">Monthly</span>
-                        <h5>Requette</h5>
+                        <span class="label label-success pull-right"><spring:message code="Trust.monthly"/></span>
+                        <h5><spring:message code="Trust.request"/></h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">201</h1>
+                        <h1 class="no-margins"><spring:message code="Trust.201"/></h1>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-success pull-right">Monthly</span>
-                        <h5>Requette</h5>
+                        <span class="label label-success pull-right"><spring:message code="Trust.monthly"/></span>
+                        <h5><spring:message code="Trust.request"/></h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">201</h1>
+                        <h1 class="no-margins"><spring:message code="Trust.201"/></h1>
                     </div>
                 </div>
             </div>
@@ -56,7 +57,7 @@
             <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 ">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Assemblée Générale</h5>
+                        <h5><spring:message code="Trust.meeting"/></h5>
                     </div>
                     <div class="ibox-content">
                         <div class="feed-element">
@@ -82,7 +83,7 @@
             <div class="col-lg-5 col-md-6 col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Message</h5>
+                        <h5><spring:message code="Trust.message"/></h5>
                     </div>
                     <div class="ibox-content ibox-heading">
                         <h3><i class="fa fa-envelope-o"></i> New messages</h3>
@@ -111,25 +112,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     </jsp:body>
 </t:template_trust>

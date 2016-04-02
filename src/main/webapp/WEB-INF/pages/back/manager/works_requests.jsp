@@ -1,20 +1,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template_manager>
-    <jsp:attribute name="title">Demande Travaux</jsp:attribute>
+    <jsp:attribute name="title"><spring:message code="Mwrv.workRequest"/></jsp:attribute>
 
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Demande Travaux</h2>
+                <h2><spring:message code="Mwrv.workRequest"/></h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="${pageContext.request.contextPath}/manager">Accueil</a>
+                        <a href="${pageContext.request.contextPath}/manager"><spring:message code="Mwrv.home"/></a>
                     </li>
                     <li class="active">
-                        <strong>Demande Travaux</strong>
+                        <strong><spring:message code="Mwrv.workRequest"/></strong>
                     </li>
                 </ol>
             </div>
@@ -29,15 +30,15 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-content mailbox-content">
                             <div class="file-manager">
-                                <a class="btn btn-block btn-primary compose-mail" href="${pageContext.request.contextPath}/manager/message/new">Nouveau Message</a>
+                                <a class="btn btn-block btn-primary compose-mail" href="${pageContext.request.contextPath}/manager/message/new"><spring:message code="Mwrv.newMsg"/></a>
                                 <div class="space-25"></div>
-                                <h5>Dossier</h5>
+                                <h5><spring:message code="Mwrv.folder"/></h5>
                                 <ul class="folder-list m-b-md" style="padding: 0">
-                                    <li><a href="${pageContext.request.contextPath}/manager/message"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">${fn:length(account.messageReceived)}</span> </a></li>
-                                    <li><a href=""> <i class="fa fa-envelope-o"></i> Message envoyé</a></li>
-                                    <li><a href=""> <i class="fa fa-certificate"></i> Important</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/manager/works/requests"> <i class="fa fa-certificate"></i> Demande Travaux</a></li>
-                                    <li><a href=""> <i class="fa fa-trash-o"></i> Poubelle</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/message"> <i class="fa fa-inbox "></i> <spring:message code="Mwrv.inbox"/> <span class="label label-warning pull-right">${fn:length(account.messageReceived)}</span> </a></li>
+                                    <li><a href=""> <i class="fa fa-envelope-o"></i><spring:message code="Mwrv.msgSend"/></a></li>
+                                    <li><a href=""> <i class="fa fa-certificate"></i> <spring:message code="Mwrv.important"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/works/requests"> <i class="fa fa-certificate"></i><spring:message code="Mwrv.workRequest"/></a></li>
+                                    <li><a href=""> <i class="fa fa-trash-o"></i> <spring:message code="Mwrv.trash"/></a></li>
                                 </ul>
 
                                 <div class="clearfix"></div>
@@ -48,7 +49,7 @@
                 <div class="col-lg-9 animated fadeInRight">
                     <div class="mail-box-header">
                         <h2>
-                            Demande Travaux
+                            <spring:message code="Mwrv.workRequest"/>x
                         </h2>
                         <div class="mail-tools tooltip-demo m-t-md">
                             <div class="btn-group pull-right">
