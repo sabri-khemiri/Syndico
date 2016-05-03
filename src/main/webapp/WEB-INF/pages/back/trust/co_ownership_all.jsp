@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <t:template_trust>
     <jsp:attribute name="title"><spring:message code="Toa.ownerShip"/></jsp:attribute>
@@ -45,8 +45,7 @@
                     </li>
                 </ol>
             </div>
-            <div class="col-lg-2">
-            </div>
+            <div class="col-lg-2"></div>
         </div>
 
         <div class="wrapper wrapper-content animated fadeInRight">
@@ -54,12 +53,12 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5><spring:message code="Toa.ownerShip"/></h5>
+                            <h5>Liste des <spring:message code="Toa.ownerShip"/></h5>
                         </div>
                         <div class="ibox-content">
                             <span class="row">
                                 <a href="${pageContext.request.contextPath}/trust/co_ownership/add">
-                                    <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> <spring:message code="Toa.newownerShip"/></button>
+                                    <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> <spring:message code="Toa.newOwnerShip"/></button>
                                 </a>
                             </span>
                             <div class="table-responsive">
@@ -70,7 +69,7 @@
                                             <th><spring:message code="Toa.adress"/></th>
                                             <th><spring:message code="Toa.date"/></th>
                                             <th><spring:message code="Toa.nbManager"/></th>
-                                            <th><spring:message code="Toa.coOwner"/></th>
+                                            <th>Nombre Copropriétaire</th>
                                             <th><spring:message code="Toa.option"/></th>
                                         </tr>
                                     </thead>
@@ -84,8 +83,8 @@
                                                 <td class="center">${fn:length(coOwnership.owners)}</td>
                                                 <td>
                                                     <a href="${pageContext.request.contextPath}/trust/co_ownership/view/${coOwnership.id}"><i class="fa fa-eye"></i></a>
-                                                    <a href="${pageContext.request.contextPath}/trust/co_ownership/update/${coOwnership.id}"><i class="fa fa-edit"></i></a>
-                                                    <a href="${pageContext.request.contextPath}/trust/co_ownership/delete/${coOwnership.id}"><i class="fa fa-trash"></i></a>
+                                                    <a href="${pageContext.request.contextPath}/trust/co_ownership/update/${coOwnership.id}"><i class="fa fa-edit" style="color:green"></i></a>
+                                                    <a href=""><i class="fa fa-trash" style="color:red"></i></a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -93,7 +92,7 @@
                                     <tfoot>
                                         <tr>
                                             <th><spring:message code="Toa.name"/></th>
-                                            <th><spring:message code="Toa.adresse"/></th>
+                                            <th><spring:message code="Toa.adress"/></th>
                                             <th><spring:message code="Toa.date"/></th>
                                             <th><spring:message code="Toa.nbManager"/></th>
                                             <th><spring:message code="Toa.coOwner"/></th>

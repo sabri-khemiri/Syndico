@@ -5,37 +5,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template_manager>
-    <jsp:attribute name="title">${account.username}</jsp:attribute>
+    <jsp:attribute name="title">Profil</jsp:attribute>
 
-    <jsp:attribute name="css">
-        <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
-    </jsp:attribute>
-
-    <jsp:attribute name="js">
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/jquery.dataTables.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/dataTables.responsive.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/pace/pace.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/jsKnob/jquery.knob.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                $('.dataCoOwnership').DataTable({
-                    "dom": 'lTfigtp',
-                    "tableTools": {
-                        "sSwfPath": "${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
-                    },
-                    "language": {
-                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
-                    }
-                });
-                $(".dial").knob();
-            });
-        </script>
-    </jsp:attribute>
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
@@ -88,6 +59,7 @@
                                         <spring:message code="Mprof.create"/>
                                     </li>
                                 </ul>
+                                <span class="small text-center"><a href="${pageContext.request.contextPath}/manager/profil/image/">Modifier image</a></span>
                             </div>
                         </div>
                     </div>
@@ -111,5 +83,5 @@
                 </div>
             </div>
         </div>
-            </jsp:body>
-        </t:template_manager>
+    </jsp:body>
+</t:template_manager>

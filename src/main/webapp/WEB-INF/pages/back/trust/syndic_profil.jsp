@@ -6,52 +6,22 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template_trust>
-    <jsp:attribute name="title">${account.username}</jsp:attribute>
+    <jsp:attribute name="title">Syndic profil</jsp:attribute>
 
-    <jsp:attribute name="css">
-        <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
-    </jsp:attribute>
-
-    <jsp:attribute name="js">
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/jquery.dataTables.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/dataTables.responsive.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/pace/pace.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/jsKnob/jquery.knob.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                $('.dataCoOwnership').DataTable({
-                    "dom": 'lTfigtp',
-                    "tableTools": {
-                        "sSwfPath": "${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
-                    },
-                    "language": {
-                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
-                    }
-                });
-                $(".dial").knob();
-            });
-        </script>
-    </jsp:attribute>
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <h2><spring:message code="Tps.syndic"/>${trust.name}</h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="${pageContext.request.contextPath}/manager"><spring:message code="Tps.home"/></a>
+                        <a href="${pageContext.request.contextPath}/trust"><spring:message code="Tps.home"/></a>
                     </li>
                     <li class="active">
-                        <strong><spring:message code="Tps.syndic"/></strong>
+                        <strong><spring:message code="Tps.syndic"/> ${trust.name}</strong>
                     </li>
                 </ol>
             </div>
-            <div class="col-lg-2">
-            </div>
+            <div class="col-lg-2"></div>
         </div>
 
         <div class="wrapper wrapper-content animated fadeInDown">
@@ -101,6 +71,7 @@
                                         <spring:message code="Tps.create"/>
                                     </li>
                                 </ul>
+                                <span class="small text-center"><a href="${pageContext.request.contextPath}/trust/syndic/profil/image/">Modifier image</a></span>
                             </div>
                         </div>
                     </div>

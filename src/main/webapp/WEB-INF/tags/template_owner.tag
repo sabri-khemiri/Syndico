@@ -79,7 +79,7 @@
                                 </ul>
                             </li>
                             <li class="topbar-devider"></li>
-                            <li><a href="">Déconnexion</a></li>
+                            <li><a href="${pageContext.request.contextPath}/logout">Déconnexion</a></li>
                         </ul>
                     </div>
                     <!-- End Topbar -->
@@ -97,12 +97,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="${pageContext.request.contextPath}/owner/works" class="dropdown-toggle">
                                     Travaux
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="${pageContext.request.contextPath}/owner/meeting" class="dropdown-toggle">
                                     Assenblé général
                                 </a>
                             </li>
@@ -112,7 +112,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/owner/profil" class="dropdown-toggle" data-toggle="dropdown">
+                                <a href="${pageContext.request.contextPath}/owner/profil" class="dropdown-toggle">
                                     Profil
                                 </a>
                             </li>

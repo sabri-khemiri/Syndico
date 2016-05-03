@@ -30,14 +30,10 @@ import com.miaou.users.model.AccountTrust;
 import com.miaou.works.dao.WorksDao;
 import com.miaou.works.dao.WorksRequestDao;
 import com.miaou.works.model.WorksRequest;
-import com.miaou.works.model.WorksSmall;
-import java.math.BigInteger;
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,7 +43,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -80,19 +78,6 @@ public class OwnerController {
         return getMinModel(getAccount(), "home");
     }
 
-    @RequestMapping(value = {"/owner/comment/add"}, method = RequestMethod.POST)
-    public ModelAndView addCommentPage(HttpServletRequest request) {
-        NewComment nc = new NewComment();
-        nc.setAuthor(getAccount());
-        nc.setNews(newsDao.getById(Integer.parseInt(request.getParameter("idNew"))));
-        nc.setContents(request.getParameter("contents"));
-
-        if (nc.getContents() != null && nc.getContents().trim() != "")
-            newCommentDao.addNewComment(nc);
-        
-        return new ModelAndView("redirect:/owner");
-    }
-
     @RequestMapping(value = {"/owner/news/add**"}, method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView addNewsPage(News news, BindingResult result, HttpServletRequest request) {
         AccountOwner account = getAccount();
@@ -120,93 +105,21 @@ public class OwnerController {
             return model;
         }
     }
+    
+    @RequestMapping(value = {"/owner/comment/add"}, method = RequestMethod.POST)
+    public ModelAndView addCommentPage(HttpServletRequest request) {
+        NewComment nc = new NewComment();
+        nc.setAuthor(getAccount());
+        nc.setNews(newsDao.getById(Integer.parseInt(request.getParameter("idNew"))));
+        nc.setContents(request.getParameter("contents"));
 
-    @RequestMapping(value = {"/owner/add_works_request**"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView addWorksRequestPage(WorksRequest wr, BindingResult result, HttpServletRequest request) {
-        AccountOwner account = getAccount();
-
-        if (request.getMethod() == "POST") {
-            WorksRequestFormValidator fv = new WorksRequestFormValidator();
-            fv.validate(wr, result);
-            if (result.hasErrors()) {
-                ModelAndView model = getMinModel(account, "add_works_request");
-                model.addObject("errors", result);
-                model.addObject("worksRequest", wr);
-                return model;
-            } 
-            else {
-                wr.setOwner(account);
-                wr.setStatus("EN ATTENTE");
-                worksRequestDao.addWorksRequest(wr);
-                
-                return new ModelAndView("redirect:/owner");
-            }
-        } 
-        else {
-            ModelAndView model = getMinModel(account, "add_works_request");
-            model.addObject("worksRequest", new WorksRequest());
-            return model;
-        }
-    }
-
-    
-    
-    
-    
-    @RequestMapping(value = {"owner/meeting/resolution/add/{id}"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody ModelAndView updateMeetingPage(Resolution resolution, BindingResult result, HttpServletRequest request, @PathVariable(value="id") int id) {
-        AccountOwner account = getAccount();
+        if (nc.getContents() != null && nc.getContents().trim() != "")
+            newCommentDao.addNewComment(nc);
         
-        if (request.getMethod() == "POST") {
-            ResolutionFormValidator fv = new ResolutionFormValidator();
-            fv.validate(resolution, result);
-
-            if (result.hasErrors()) {
-                ModelAndView model = getMinModel(account, "resolution_add");
-                model.addObject("errors", result);
-                model.addObject("resolution", resolution);
-                return model;
-            } 
-            else {
-                resolution.setOwner(account);
-                resolution.setMeeting(meetingDao.getById(id));
-                resolutionDao.addResolution(resolution); 
-                return new ModelAndView("redirect:/owner/meeting");
-            }
-        } 
-        else {
-            ModelAndView model = getMinModel(account, "resolution_add");
-            resolution = new Resolution();
-            model.addObject("resolution",resolution);
-            return model;
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    @RequestMapping(value = {"/owner/meeting/resolution_add**"}, method = RequestMethod.POST)
-    public ModelAndView addResolutionPage(HttpServletRequest request) {
-        AccountOwner account = getAccount();
-        Resolution r = new Resolution();
-
-        r.setOwner(account);
-        r.setMeeting(meetingDao.getById(Integer.parseInt(request.getParameter("id"))));
-        r.setContents(request.getParameter("contents"));
-
-        if (r.getContents() != null && r.getContents().trim() != "") {
-            resolutionDao.addResolution(r);
-        }
-
         return new ModelAndView("redirect:/owner");
     }
     
-        /**************************************************************************/
+    /**************************************************************************/
     /**************************DEBUT DES PAGES MESSAGE*************************/
     /**************************************************************************/ 
     
@@ -284,10 +197,33 @@ public class OwnerController {
             return model;
         }
     }
+    
+    @RequestMapping(value = {"/owner/message/delete"}, method = RequestMethod.GET)
+    public ModelAndView messageDeletePage() {
+        return getMinModel(getAccount(), "message_delete");
+    }
+    
+    @RequestMapping(value = {"/owner/message/delete/{someID}"}, method = RequestMethod.GET)
+    public @ResponseBody
+    ModelAndView messageDeletePage(@PathVariable(value = "someID") int id) {
+        AccountOwner account = getAccount();
+        Message m = messageDao.getById(id);
+
+        if (m != null && !m.getSender().getUsername().equals(account.getUsername()) && !m.getRecipient().getUsername().equals(account.getUsername())) {
+            return new ModelAndView("redirect:/404");
+        }
+
+        m.setStatus(MessageStatus.DELETE);
+        messageDao.updateMessage(m);
+        return new ModelAndView("redirect:/owner/message");
+    }
 
     /**************************************************************************/
     /***************************FIN DES PAGES MESSAGE**************************/
 
+    /**************************************************************************/
+    /**************************DEBUT DES PAGES PROFIL**************************/
+    /**************************************************************************/ 
     @RequestMapping(value = {"/owner/profil"}, method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView profilPage(Account faccount, BindingResult result, HttpServletRequest request) {
         AccountOwner account = getAccount();
@@ -316,16 +252,121 @@ public class OwnerController {
         }
     }
     
-     @RequestMapping(value = {"/owner/works"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/owner/profil/image/"}, method = RequestMethod.GET)
+    public ModelAndView profilUpdateImageViewpage(HttpServletRequest request) {
+        AccountOwner account = getAccount();
+        ModelAndView model = getMinModel(account, "profil_image");
+        return model;
+    }
+
+    @RequestMapping(value = {"/owner/profil/image/upload"}, method = RequestMethod.POST)
+    public ModelAndView profilImageUpload(HttpServletRequest request, @RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
+        if (fileUpload.length < 0) {
+            return new ModelAndView("redirect:/owner/profil/image/");
+        }
+
+        AccountOwner a = (AccountOwner) accountDao.findByUsername(getAccount().getUsername());
+
+        if (fileUpload != null && fileUpload.length > 0) {
+            for (CommonsMultipartFile aFile : fileUpload) {
+                if (!aFile.getOriginalFilename().equals("")) {
+                    String[] s = aFile.getOriginalFilename().split(Pattern.quote("."));
+                    aFile.transferTo(new File("E:/Users/Desktop/Projet/Syndico/src/main/webapp/resources/images/user/" + a.getId() + "." + s[1]));
+                    a.setImage("." + s[1]);
+                    accountDao.updateAccount(a);
+                }
+            }
+        }
+
+        return new ModelAndView("redirect:/owner/profil");
+    }
+    
+    /**************************************************************************/
+    /**************************FIN DES PAGES PROFIL****************************/
+    /**************************************************************************/ 
+    
+    /**************************************************************************/
+    /**************************DEBUT DES PAGES TRAVAUX*************************/
+    /**************************************************************************/ 
+    
+    @RequestMapping(value = {"/owner/works"}, method = RequestMethod.GET)
     public ModelAndView worksPage() {
         return getMinModel(getAccount(), "works");
     }
+    
+    @RequestMapping(value = {"/owner/works/request/add**"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView addWorksRequestPage(WorksRequest wr, BindingResult result, HttpServletRequest request) {
+        AccountOwner account = getAccount();
+
+        if (request.getMethod() == "POST") {
+            WorksRequestFormValidator fv = new WorksRequestFormValidator();
+            fv.validate(wr, result);
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "add_works_request");
+                model.addObject("errors", result);
+                model.addObject("worksRequest", wr);
+                return model;
+            } 
+            else {
+                wr.setOwner(account);
+                wr.setStatus("EN ATTENTE");
+                worksRequestDao.addWorksRequest(wr);
+                
+                return new ModelAndView("redirect:/owner");
+            }
+        } 
+        else {
+            ModelAndView model = getMinModel(account, "add_works_request");
+            model.addObject("worksRequest", new WorksRequest());
+            return model;
+        }
+    }
+    
+    /**************************************************************************/
+    /**************************FIN DES PAGES TRAVAUX***************************/
+    /**************************************************************************/ 
+    
+    /**************************************************************************/
+    /**************************DEBUT DES PAGES AG******************************/
+    /**************************************************************************/ 
     
     @RequestMapping(value = {"/owner/meeting"}, method = RequestMethod.GET)
     public ModelAndView meetingPage() {
         return getMinModel(getAccount(), "meeting");
     }
     
+    @RequestMapping(value = {"owner/meeting/resolution/add/{id}"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public @ResponseBody ModelAndView updateMeetingPage(Resolution resolution, BindingResult result, HttpServletRequest request, @PathVariable(value="id") int id) {
+        AccountOwner account = getAccount();
+        
+        if (request.getMethod() == "POST") {
+            ResolutionFormValidator fv = new ResolutionFormValidator();
+            fv.validate(resolution, result);
+
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "resolution_add");
+                model.addObject("errors", result);
+                model.addObject("resolution", resolution);
+                return model;
+            } 
+            else {
+                resolution.setOwner(account);
+                resolution.setMeeting(meetingDao.getById(id));
+                resolutionDao.addResolution(resolution); 
+                return new ModelAndView("redirect:/owner/meeting");
+            }
+        } 
+        else {
+            ModelAndView model = getMinModel(account, "resolution_add");
+            resolution = new Resolution();
+            model.addObject("resolution",resolution);
+            return model;
+        }
+    }
+    /**************************************************************************/
+    /**************************FIN DES PAGES AG********************************/
+    /**************************************************************************/ 
+       
     private ModelAndView getMinModel(AccountOwner account){
         ModelAndView model = new ModelAndView();
         model.addObject("account", account);

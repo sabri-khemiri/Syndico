@@ -56,7 +56,10 @@
                             <a  href="${pageContext.request.contextPath}/manager/message"><i class="fa fa-envelope-o"></i> <span class="nav-label">Message</span></a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/manager/works/requests"><i class="fa fa-question"></i> <span class="nav-label">Travaux</span></a>
+                            <a href="${pageContext.request.contextPath}/manager/works/requests"><i class="fa fa-legal"></i> <span class="nav-label">Demande Travaux</span></a>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/manager/meeting"><i class="fa fa-users"></i> <span class="nav-label">Assemblée générale</span></a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/manager/news/add"><i class="fa fa-comments-o"></i> <span class="nav-label">Annonce General</span></a>

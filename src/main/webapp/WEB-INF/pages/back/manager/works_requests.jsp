@@ -34,11 +34,11 @@
                                 <div class="space-25"></div>
                                 <h5><spring:message code="Mwrv.folder"/></h5>
                                 <ul class="folder-list m-b-md" style="padding: 0">
-                                    <li><a href="${pageContext.request.contextPath}/manager/message"> <i class="fa fa-inbox "></i> <spring:message code="Mwrv.inbox"/> <span class="label label-warning pull-right">${fn:length(account.messageReceived)}</span> </a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/message"> <i class="fa fa-inbox "></i> <spring:message code="Mwrv.inbox"/> </a></li>
                                     <li><a href=""> <i class="fa fa-envelope-o"></i><spring:message code="Mwrv.msgSend"/></a></li>
                                     <li><a href=""> <i class="fa fa-certificate"></i> <spring:message code="Mwrv.important"/></a></li>
-                                    <li><a href="${pageContext.request.contextPath}/manager/works/requests"> <i class="fa fa-certificate"></i><spring:message code="Mwrv.workRequest"/></a></li>
-                                    <li><a href=""> <i class="fa fa-trash-o"></i> <spring:message code="Mwrv.trash"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/works/requests"> <i class="fa fa-legal"></i><spring:message code="Mwrv.workRequest"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/message/delete"> <i class="fa fa-trash-o"></i> Corbeille</a></li>
                                 </ul>
 
                                 <div class="clearfix"></div>

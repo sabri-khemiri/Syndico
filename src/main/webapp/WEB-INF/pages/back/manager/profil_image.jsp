@@ -3,21 +3,21 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
 <t:template_manager>
-    <jsp:attribute name="title">Clôture assemblée générale</jsp:attribute>
+    <jsp:attribute name="title">Modification de l'image de profil</jsp:attribute>
 
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Clôture assemblée générale</h2>
+                <h2>Image de profil</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="${pageContext.request.contextPath}/manager">Accueil</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/manager/meeting">Assemblée générale</a>
+                        <a href="${pageContext.request.contextPath}/manager/profil">Profil</a>
                     </li>
                     <li class="active">
-                        <strong>Clôture Assemblée Générale</strong>
+                        <strong>Modification de l'image de profil</strong>
                     </li>
                 </ol>
             </div>
@@ -30,13 +30,13 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Cloture assemblé général</h5>
+                            <h5>Modification de l'image de profil</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="col-lg-offset-1 col-lg-10">
-                                    <form method="POST" action="${pageContext.request.contextPath}/manager/meeting/close/${id}/upload?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
-                                        <div class="form-group"><label class="control-label">Sélection du fichier de compte rendu</label><span class="text-danger">*</span>
+                                    <form method="POST" action="${pageContext.request.contextPath}/manager/profil/image/upload?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
+                                        <div class="form-group"><label class="control-label">Sélection de la nouvelle image</label><span class="text-danger">*</span>
 
                                             <div><input type="file" class="form-control" name="fileUpload" /></div>
                                         </div>

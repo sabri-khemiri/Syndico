@@ -7,7 +7,7 @@
     <jsp:body>
 
 
-        <div class="breadcrumbs-v1" style="background-image: url('${pageContext.request.contextPath}/resources/images/login/login_bg_2.jpg')">
+        <div class="breadcrumbs-v1" style="background-image: url('${pageContext.request.contextPath}/resources/images/owner/works.jpg')">
             <div class="container">
                 <span>Travaux</span>
             </div>

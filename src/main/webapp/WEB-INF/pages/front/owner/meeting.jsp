@@ -89,7 +89,11 @@
                                 <tr>
                                     <td>${meeting.meetingDate}</td>
                                     <td>${meeting.contents}</td>
-                                    <td><span class="label label-blue">Telecharger</span></td>
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}/resources/ag/${meeting.id}${meeting.report}">
+                                            <span class="label label-blue">Telecharger</span>
+                                        </a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>

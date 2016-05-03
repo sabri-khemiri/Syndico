@@ -13,7 +13,7 @@
                 <h2><spring:message code="Mad.newAd"/></h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="${pageContext.request.contextPath}/trust"><spring:message code="Mad.home"/></a>
+                        <a href="${pageContext.request.contextPath}/manager"><spring:message code="Mad.home"/></a>
                     </li>
                     <li class="active">
                         <strong><spring:message code="Mad.newAd"/></strong>

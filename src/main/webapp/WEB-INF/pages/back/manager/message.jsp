@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template_manager>
- <jsp:attribute name="title"><spring:message code="Mmsg.message"/></jsp:attribute>
+    <jsp:attribute name="title"><spring:message code="Mmsg.message"/></jsp:attribute>
 
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
@@ -34,10 +34,11 @@
                                 <div class="space-25"></div>
                                 <h5>Dossier</h5>
                                 <ul class="folder-list m-b-md" style="padding: 0">
-                                    <li><a href="${pageContext.request.contextPath}/manager/message"> <i class="fa fa-inbox "></i> <spring:message code="Mmsg.inbox"/> <span class="label label-warning pull-right">${fn:length(account.messageReceived)}</span> </a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/message"> <i class="fa fa-inbox "></i> <spring:message code="Mmsg.inbox"/> </a></li>
                                     <li><a href=""> <i class="fa fa-envelope-o"></i> <spring:message code="Mmsg.msgSend"/></a></li>
                                     <li><a href=""> <i class="fa fa-certificate"></i> <spring:message code="Mmsg.important"/></a></li>
-                                    <li><a href=""> <i class="fa fa-trash-o"></i> <spring:message code="Mmsg.trash"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/works/requests"> <i class="fa fa-legal"></i> <spring:message code="Mwrv.workRequest"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/message/delete"> <i class="fa fa-trash-o"></i> Corbeille</a></li>
                                 </ul>
 
                                 <div class="clearfix"></div>
@@ -64,35 +65,28 @@
                         <table class="table table-hover table-mail">
                             <tbody>
                                 <c:forEach var="message" items="${account.messageReceived}">
-                                    <tr class="${message.status == "NON_LU" ? "unread" : "read"}"/>
-                                <td class="check-mail">
-                                    <input type="checkbox" class="i-checks">
-                                </td>
-                                <td class="mail-ontact"><a href="${pageContext.request.contextPath}/manager/message/view/${message.id}">${message.sender.firstName}  ${message.sender.lastName}</a></td>
-                                <td class="mail-subject"><a href="${pageContext.request.contextPath}/manager/message/view/${message.id}">${message.subject}</a></td>
-                                <td class="text-right mail-date">${message.creationDate}</td>
-                                </tr>
-                            </c:forEach>
+                                    <c:if test="${message.status != 'DELETE'}" >
+                                        <tr class="${message.status == "NON_LU" ? "unread" : "read"}"/>
+                                            <td class="check-mail">
+                                                <input type="checkbox" class="i-checks">
+                                            </td>
+                                            <td class="mail-ontact">
+                                                ${message.sender.role == "ROLE_TRUST" ? "Syndic : " : ""}
+                                                ${message.sender.role == "ROLE_MANAGER" ? "Gestionnaire : " : ""}
+                                                ${message.sender.role == "ROLE_OWNER" ? "Copropriétaire : " : ""}
+                                                <a href="${pageContext.request.contextPath}/manager/message/view/${message.id}">
+                                                    ${message.sender.firstName}  ${message.sender.lastName}
+                                                </a>
+                                            </td>                                            <td class="mail-subject"><a href="${pageContext.request.contextPath}/manager/message/view/${message.id}">${message.subject}</a></td>
+                                            <td class="text-right mail-date">${message.creationDate}</td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </jsp:body>
 </t:template_manager>

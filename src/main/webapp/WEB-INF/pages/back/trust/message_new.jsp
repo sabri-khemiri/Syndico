@@ -37,10 +37,10 @@
                                 <div class="space-25"></div>
                                 <h5><spring:message code="TnewM.folder"/></h5>
                                 <ul class="folder-list m-b-md" style="padding: 0">
-                                    <li><a href="${pageContext.request.contextPath}/trust/message"> <i class="fa fa-inbox "></i> <spring:message code="TnewM.inbox"/> <span class="label label-warning pull-right">${fn:length(account.messageReceived)}</span> </a></li>
+                                    <li><a href="${pageContext.request.contextPath}/trust/message"> <i class="fa fa-inbox "></i> <spring:message code="Tmsg.inbox"/></a></li>
                                     <li><a href=""> <i class="fa fa-envelope-o"></i> <spring:message code="TnewM.msgSend"/></a></li>
                                     <li><a href=""> <i class="fa fa-certificate"></i> <spring:message code="TnewM.important"/></a></li>
-                                    <li><a href=""> <i class="fa fa-trash-o"></i> <spring:message code="TnewM.trash"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/trust/message/delete"> <i class="fa fa-trash-o"></i> Corbeille</a></li>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>

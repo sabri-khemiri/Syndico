@@ -52,16 +52,16 @@
     <jsp:body>
  <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2><spring:message code="Mwork.insertlittleWork"/></h2>
+                <h2></h2>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="${pageContext.request.contextPath}/manager"><spring:message code="Mwork.home"/></a>
+                        <a href="${pageContext.request.contextPath}/manager"></a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/manager/co_ownership"><spring:message code="Mwork.ownerShip"/></a>
+                        <a href="${pageContext.request.contextPath}/manager/co_ownership"></a>
                     </li>
                     <li class="active">
-                        <strong><spring:message code="Mwork.inserLittleWork"/></strong>
+                        <strong>Nouveau travaux majeur</strong>
                     </li>
                 </ol>
             </div>
@@ -74,39 +74,45 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5><spring:message code="Mwork.createLittleWork"/></h5>
+                            <h5>Nouveau travaux majeur</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="col-lg-offset-1 col-lg-10">
-                                    <form:form role="form"  action="" commandName="works" method="POST" class="">  
-                                        <div class="form-group"><label class="control-label"><spring:message code="Mwork.title"/></label><span class="text-danger">*</span>
-                                            <div class=""><form:input class="form-control" path="title" /></div>
+                                    <form action="/manager/works/major/add/upload?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data" method="POST" class="">  
+                                        <div class="form-group"><label class="control-label">Titre</label><span class="text-danger">*</span>
+                                            <div class=""><input class="form-control" name="title" /></div>
                                         </div>
                                         <div class="form-group" id="data_1">
-                                            <label class="control-label"><spring:message code="Mwork.begin"/></label><span class="text-danger">*</span>
+                                            <label class="control-label">Date de debut</label><span class="text-danger">*</span>
                                             <div class="input-group date">
-                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><form:input path="startDate" type="text" class="form-control" />
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="startDate" type="text" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="form-group" id="data_2">
-                                            <label class="control-label"><spring:message code="Mwork.end"/></label>
+                                            <label class="control-label">Date de fin</label>
                                             <div class="input-group date">
-                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><form:input path="endDate" type="text" class="form-control" />
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="endDate" type="text" class="form-control" />
                                             </div>
                                         </div>
-                                        <div class="form-group"><label class="control-label"><spring:message code="Mwork.text"/></label><span class="text-danger">*</span>
-                                            <div class=""><form:textarea class="form-control" rows="10" path="contents" /></div>
+                                        <div class="form-group"><label class="control-label">Description</label><span class="text-danger">*</span>
+                                            <div class=""><textarea class="form-control" rows="10" name="contents" ></textarea></div>
                                         </div>
+                                            
+                                        <div class="form-group"><label class="control-label">Nom Entreprise</label>
+                                            <div class=""><input class="form-control" name="companyName" /></div>
+                                        </div>                                            
                                         <div class="form-group"><label class="control-label"><spring:message code="Mwork.price"/></label>
-                                            <div class=""><form:input class="form-control" path="cost" /></div>
+                                            <div class=""><input class="form-control" name="cost" /></div>
+                                        </div>
+                                        <div class="form-group"><label class="control-label">Fichier</label>
+                                            <div class=""><input type="file" class="form-control" name="fileUpload" /></div>
                                         </div>
                                         <div>
                                             <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong><spring:message code="Mwork.valid"/></strong></button>
                                         </div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                                        <input type="hidden" name="id" value="${works.id}"/>
-                                    </form:form>
+                                    </form>
                                     <p class="">(<span class="text-danger">*</span>)<spring:message code="Mwork.required"/>e</p>
                                 </div>
                             </div>

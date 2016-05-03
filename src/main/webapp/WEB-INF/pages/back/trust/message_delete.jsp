@@ -4,18 +4,21 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template_trust>
-    <jsp:attribute name="title"><spring:message code="Tmsg.message"/></jsp:attribute>
+    <jsp:attribute name="title">Corbeille</jsp:attribute>
 
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2><spring:message code="Tmsg.message"/></h2>
+                <h2>Corbeille</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="${pageContext.request.contextPath}/trust"><spring:message code="Tmsg.home"/></a>
                     </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/trust/message">Message</a>
+                    </li>
                     <li class="active">
-                        <strong><spring:message code="Tmsg.message"/></strong>
+                        <strong>Corbeille</strong>
                     </li>
                 </ol>
             </div>
@@ -36,7 +39,7 @@
                                     <li><a href="${pageContext.request.contextPath}/trust/message"> <i class="fa fa-inbox "></i> <spring:message code="Tmsg.inbox"/></a></li>
                                     <li><a href=""> <i class="fa fa-envelope-o"></i> <spring:message code="Tmsg.msgSend"/></a></li>
                                     <li><a href=""> <i class="fa fa-certificate"></i> <spring:message code="Tmsg.important"/></a></li>
-                                    <li><a href="${pageContext.request.contextPath}/trust/message/delete"> <i class="fa fa-trash-o"></i>Corbeille</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/trust/message/delete"> <i class="fa fa-trash-o"></i> Corbeille</a></li>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
@@ -62,7 +65,7 @@
                         <table class="table table-hover table-mail">
                             <tbody>
                                 <c:forEach var="message" items="${account.messageReceived}">
-                                    <c:if test="${message.status != 'DELETE'}" >
+                                    <c:if test="${message.status == 'DELETE'}" >
                                         <tr class="${message.status == "NON_LU" ? "unread" : "read"}"/>
                                             <td class="check-mail">
                                                 <input type="checkbox" class="i-checks">
@@ -73,8 +76,7 @@
                                                 ${message.sender.role == "ROLE_OWNER" ? "Copropriétaire : " : ""}
                                                 <a href="${pageContext.request.contextPath}/trust/message/view/${message.id}">
                                                     ${message.sender.firstName}  ${message.sender.lastName}
-                                                </a>
-                                            </td>
+                                                </a>                                            </td>
                                             <td class="mail-subject"><a href="${pageContext.request.contextPath}/trust/message/view/${message.id}">${message.subject}</a></td>
                                             <td class="text-right mail-date">${message.creationDate}</td>
                                         </tr>

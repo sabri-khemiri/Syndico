@@ -5,24 +5,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <t:template_manager>
     <jsp:attribute name="title"><spring:message code="McoAU.insertOwnerShip"/></jsp:attribute>
-
-    <jsp:attribute name="css">
-        <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-    </jsp:attribute>
-
-    <jsp:attribute name="js">
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/iCheck/icheck.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('.i-checks').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
-                });
-            });
-        </script>
-    </jsp:attribute>
-
+    
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">

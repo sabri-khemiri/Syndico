@@ -6,20 +6,11 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <t:template_owner>
     <jsp:body>
-
-
-        <!--=== Breadcrumbs ===-->
-        <div class="breadcrumbs">
+        <div class="breadcrumbs-v1" style="background-image: url('${pageContext.request.contextPath}/resources/images/owner/works.jpg')">
             <div class="container">
-                <h1 class="pull-left"><spring:message code="Oawr.insertNewAd"/></h1>
-                <ul class="pull-right breadcrumb">
-                    <li><a href="index.html"><spring:message code="Oawr.home"/></a></li>
-                    <li><a href="">Features</a></li>
-                    <li class="active">General Forms</li>
-                </ul>
+                <span>Deamande Travaux</span>
             </div>
-        </div><!--/breadcrumbs-->
-        <!--=== End Breadcrumbs ===-->
+        </div>
 
         <div class="container content">
             <div class="row">
@@ -29,7 +20,7 @@
                         <header><spring:message code="Oawr.insertNewAd"/></header>
                         <fieldset>
                             <section>
-                                <label class="label"><spring:message code="Oawr.title"/>/<label>
+                                <label class="label"><spring:message code="Oawr.title"/><label>
                                 <label class="input">
                                     <form:input type="text" path="title" value="${worksRequest.title}" />
                                 </label>

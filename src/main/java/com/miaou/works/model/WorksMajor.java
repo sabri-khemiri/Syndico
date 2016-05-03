@@ -17,6 +17,9 @@ public class WorksMajor extends Works {
 
     private Set<WorksQuotation> worksQuotations = new HashSet<WorksQuotation>();
     
+    public WorksMajor(){
+        super();
+    }
     
     public WorksMajor(String title, String contents){
         super(title, contents);
@@ -25,6 +28,10 @@ public class WorksMajor extends Works {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "worksMajors")
     public Set<WorksQuotation> getWorksQuotations() {
         return worksQuotations;
+    }
+    
+    public void addWorksQuotation(WorksQuotation w){
+        this.worksQuotations.add(w);
     }
 
     public void setWorksQuotations(Set<WorksQuotation> worksQuotations) {

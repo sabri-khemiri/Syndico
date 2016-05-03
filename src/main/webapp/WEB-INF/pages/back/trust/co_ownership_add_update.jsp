@@ -4,29 +4,12 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <t:template_trust>
-    <jsp:attribute name="title"><spring:message code="Toau.insertOwnerShip"/></jsp:attribute>
-
-    <jsp:attribute name="css">
-        <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
-        <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-    </jsp:attribute>
-
-    <jsp:attribute name="js">
-        <script src="${pageContext.request.contextPath}/resources/theme_2/assets/js/plugins/iCheck/icheck.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('.i-checks').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
-                });
-            });
-        </script>
-    </jsp:attribute>
-
+    <jsp:attribute name="title">Ajouter/Modifier une copropriété</jsp:attribute>
+    
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2><spring:message code="Toau.insertOwnerShip"/></h2>
+                <h2>Création/Modification d'une nouvelle copropriété</h2>
                 <ol class="breadcrumb">
                     <li>
                         <a href="${pageContext.request.contextPath}/trust"><spring:message code="Toau.home"/></a>
@@ -35,12 +18,11 @@
                         <a href="${pageContext.request.contextPath}/trust/co_ownership/all"><spring:message code="Toau.ownerShip"/></a>
                     </li>
                     <li class="active">
-                        <strong><spring:message code="Toau.insertOwnerShip"/></strong>
+                        <strong>Ajout/Modification d'une nouvelle copropriété</strong>
                     </li>
                 </ol>
             </div>
-            <div class="col-lg-2">
-            </div>
+            <div class="col-lg-2"></div>
         </div>
 
         <div class="wrapper wrapper-content animated fadeInRight">
@@ -48,7 +30,7 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5><spring:message code="Toau.createOwnerShip"/></h5>
+                            <h5>Création/Modification d'une nouvelle copropriété</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">

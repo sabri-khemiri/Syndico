@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <t:template_trust>
-    <jsp:attribute name="title">Nouveau Message</jsp:attribute>
+    <jsp:attribute name="title">Message de ${message.sender.firstName} ${message.sender.lastName}</jsp:attribute>
 
     <jsp:body>
         <div class="row wrapper border-bottom white-bg page-heading">
@@ -36,10 +36,10 @@
                                 <div class="space-25"></div>
                                 <h5>Dossier</h5>
                                 <ul class="folder-list m-b-md" style="padding: 0">
-                                    <li><a href="${pageContext.request.contextPath}/trust/message"> <i class="fa fa-inbox "></i> Inbox <span class="label label-warning pull-right">${fn:length(account.messageReceived)}</span> </a></li>
+                                    <li><a href="${pageContext.request.contextPath}/trust/message"> <i class="fa fa-inbox "></i> Inbox</a></li>
                                     <li><a href=""> <i class="fa fa-envelope-o"></i> Message envoyé</a></li>
                                     <li><a href=""> <i class="fa fa-certificate"></i> Important</a></li>
-                                    <li><a href=""> <i class="fa fa-trash-o"></i> Poubelle</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/trust/message/delete"> <i class="fa fa-trash-o"></i> Corbeille</a></li>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
@@ -49,8 +49,8 @@
                 <div class="col-lg-9 animated fadeInRight">
                     <div class="mail-box-header">
                         <div class="pull-right tooltip-demo">
-                            <a class="btn btn-sm btn-white" href=""><i class="fa fa-reply"></i> Répondre</a>
-                            <button title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i> Effacer</button>
+                            <a class="btn btn-sm btn-white" href="${pageContext.request.contextPath}/trust/message/new"><i class="fa fa-reply"></i> Répondre</a>
+                            <a class="btn btn-sm btn-white" href="${pageContext.request.contextPath}/trust/message/delete/${message.id}"><i class="fa fa-trash-o"></i> Corbeille</a>
                         </div>
                         <h2>
                             Message
@@ -72,8 +72,8 @@
                             </p>
                         </div>
                         <div class="mail-body text-right tooltip-demo">
-                            <a class="btn btn-sm btn-white" href=""><i class="fa fa-reply"></i> Répondre</a>
-                            <button title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i> Effacer</button>
+                            <a class="btn btn-sm btn-white" href="${pageContext.request.contextPath}/trust/message/new"><i class="fa fa-reply"></i> Répondre</a>
+                            <a class="btn btn-sm btn-white" href="${pageContext.request.contextPath}/trust/message/delete/${message.id}"><i class="fa fa-trash-o"></i> Corbeille</a>
                         </div>
                         <div class="clearfix"></div>
                     </div>

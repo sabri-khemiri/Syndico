@@ -36,10 +36,11 @@
                                 <div class="space-25"></div>
                                 <h5><spring:message code="Mview.folder"/></h5>
                                 <ul class="folder-list m-b-md" style="padding: 0">
-                                    <li><a href="${pageContext.request.contextPath}/manager/message"> <i class="fa fa-inbox "></i> <spring:message code="Mview.inbox"/> <span class="label label-warning pull-right">${fn:length(account.messageReceived)}</span> </a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/message"> <i class="fa fa-inbox "></i> <spring:message code="Mview.inbox"/></a></li>
                                     <li><a href=""> <i class="fa fa-envelope-o"></i> <spring:message code="Mview.msgSend"/></a></li>
                                     <li><a href=""> <i class="fa fa-certificate"></i> <spring:message code="Mview.important"/></a></li>
-                                    <li><a href=""> <i class="fa fa-trash-o"></i> <spring:message code="Mview.trash"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/works/requests"> <i class="fa fa-legal"></i> <spring:message code="Mwrv.workRequest"/></a></li>
+                                    <li><a href="${pageContext.request.contextPath}/manager/message/delete"> <i class="fa fa-trash-o"></i> Corbeille</a></li>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
@@ -49,8 +50,8 @@
                 <div class="col-lg-9 animated fadeInRight">
                     <div class="mail-box-header">
                         <div class="pull-right tooltip-demo">
-                            <a class="btn btn-sm btn-white" href=""><i class="fa fa-reply"></i> <spring:message code="Mview.answer"/></a>
-                            <button title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i> <spring:message code="Mview.send"/></button>
+                            <a class="btn btn-sm btn-white" href="${pageContext.request.contextPath}/manager/message/new"><i class="fa fa-reply"></i> <spring:message code="Mview.answer"/></a>
+                            <a class="btn btn-sm btn-white" href="${pageContext.request.contextPath}/manager/message/delete/${message.id}"><i class="fa fa-trash-o"></i> Corbeille</a>
                         </div>
                         <h2>
                             <spring:message code="Mview.message"/>
@@ -72,8 +73,8 @@
                             </p>
                         </div>
                         <div class="mail-body text-right tooltip-demo">
-                            <a class="btn btn-sm btn-white" href=""><i class="fa fa-reply"></i> <spring:message code="Mview.answer"/></a>
-                            <button title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-trash-o"></i> <spring:message code="Mview.delete"/></button>
+                            <a class="btn btn-sm btn-white" href="${pageContext.request.contextPath}/manager/message/new"><i class="fa fa-reply"></i> <spring:message code="Mview.answer"/></a>
+                            <a class="btn btn-sm btn-white" href="${pageContext.request.contextPath}/manager/message/delete/${message.id}"><i class="fa fa-trash-o"></i> Corbeille</a>
                         </div>
                         <div class="clearfix"></div>
                     </div>

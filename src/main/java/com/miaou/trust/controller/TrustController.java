@@ -19,9 +19,11 @@ import com.miaou.users.dao.AccountDao;
 import com.miaou.users.model.Account;
 import com.miaou.users.model.AccountManager;
 import com.miaou.users.model.AccountTrust;
+import java.io.File;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,7 +32,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -144,6 +148,37 @@ public class TrustController {
             return model;
         }
     }
+    
+    @RequestMapping(value = {"/trust/co_ownership/update/image/{someID}"}, method = RequestMethod.GET)
+    public @ResponseBody ModelAndView coOwnershipUpdateImageViewpage(HttpServletRequest request, @PathVariable(value="someID") int id) {
+        AccountTrust account = getAccount();
+        ModelAndView model = getMinModel(account, "co_ownership_image");
+        model.addObject("id", id);
+        return model;
+    }
+
+    @RequestMapping(value = {"/trust/co_ownership/update/image/upload"}, method = RequestMethod.POST)
+    public ModelAndView coOwnershipImageUpload(HttpServletRequest request, @RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
+        if (fileUpload.length < 0) {
+            return new ModelAndView("redirect:/trust/co_ownership/all");
+        }
+        int id = Integer.parseInt(request.getParameter("id"));
+        AccountTrust a = (AccountTrust) accountDao.findByUsername(getAccount().getUsername());
+
+        if (fileUpload != null && fileUpload.length > 0) {
+            for (CommonsMultipartFile aFile : fileUpload) {
+                if (!aFile.getOriginalFilename().equals("")) {
+                    String[] s = aFile.getOriginalFilename().split(Pattern.quote("."));
+                    aFile.transferTo(new File("E:/Users/Desktop/Projet/Syndico/src/main/webapp/resources/images/co_ownership/" + id + "." + s[1]));
+                    CoOwnership c = coOwnershipDao.getById(id);
+                    c.setImage("." + s[1]);
+                    coOwnershipDao.updateCoOwnership(c);
+                }
+            }
+        }
+
+        return new ModelAndView("redirect:/trust/co_ownership/all");
+    }
 
     @RequestMapping(value = {"/trust/co_ownership/delete/{someID}"}, method = RequestMethod.GET)
     public @ResponseBody ModelAndView deleteCoOwnershipPage(@PathVariable(value="someID") int id) {
@@ -157,10 +192,6 @@ public class TrustController {
         
         return new ModelAndView("redirect:/trust/co_ownership/all");
     }
-    
-    /**************************************************************************/
-    /*****************FIN DES PAGES DE GESTION DE CO-OWNERSHIPS****************/
-    /**************************************************************************/
     
     @RequestMapping(value = {"/trust/add_manager**"}, method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView addManagerPage(HttpServletRequest request) {
@@ -177,8 +208,11 @@ public class TrustController {
             } while (accountDao.findByUsername(username) != null);
             accountDao.addAccount(new AccountManager(username, password, coOwnership));
         }
-        return new ModelAndView("redirect:/trust/all_co_ownership");
+        return new ModelAndView("redirect:/trust/co_ownership/all");
     }
+    /**************************************************************************/
+    /*****************FIN DES PAGES DE GESTION DE CO-OWNERSHIPS****************/
+    /**************************************************************************/
     
     /**************************************************************************/
     /**************************DEBUT DES PAGES MESSAGE*************************/
@@ -262,10 +296,164 @@ public class TrustController {
         }
     }
     
+     @RequestMapping(value = {"/trust/message/delete"}, method = RequestMethod.GET)
+    public ModelAndView messageDeletePage() {
+        return getMinModel(getAccount(), "message_delete");
+    }
+    
+    @RequestMapping(value = {"/trust/message/delete/{someID}"}, method = RequestMethod.GET)
+    public @ResponseBody
+    ModelAndView messageDeletePage(@PathVariable(value = "someID") int id) {
+        AccountTrust account = getAccount();
+        Message m = messageDao.getById(id);
+
+        if (m != null && !m.getSender().getUsername().equals(account.getUsername()) && !m.getRecipient().getUsername().equals(account.getUsername())) {
+            return new ModelAndView("redirect:/404");
+        }
+
+        m.setStatus(MessageStatus.DELETE);
+        messageDao.updateMessage(m);
+        return new ModelAndView("redirect:/trust/message");
+    }
+    
     /**************************************************************************/
     /***************************FIN DES PAGES MESSAGE**************************/
     /**************************************************************************/
 
+    /**************************************************************************/
+    /***************************DEBUT DES PAGES RPOFIL*************************/
+    /**************************************************************************/
+    @RequestMapping(value = {"/trust/profil"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView profilPage(Account faccount, BindingResult result, HttpServletRequest request) {
+        AccountTrust account = getAccount();
+
+        if (request.getMethod() == "POST") {
+            AccountFormValidator fv = new AccountFormValidator();
+            fv.validate(faccount, result);
+
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "profil");
+                model.addObject("errors", result);
+                model.addObject("faccount", faccount);
+                return model;
+            } else {
+                account.setEmail(faccount.getEmail());
+                account.setFirstName(faccount.getFirstName());
+                account.setLastName(faccount.getLastName());
+                accountDao.updateAccount(account);
+                
+                return new ModelAndView("redirect:/trust/profil");
+            }
+        } else {
+            ModelAndView model = getMinModel(account, "profil");
+            model.addObject("faccount", account);
+            return model;
+        }
+    }
+    
+        @RequestMapping(value = {"/trust/profil/image/"}, method = RequestMethod.GET)
+    public ModelAndView profilUpdateImageViewpage(HttpServletRequest request) {
+        AccountTrust account = getAccount();
+        ModelAndView model = getMinModel(account, "profil_image");
+        return model;
+    }
+
+    @RequestMapping(value = {"/trust/profil/image/upload"}, method = RequestMethod.POST)
+    public ModelAndView profilImageUpload(HttpServletRequest request, @RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
+        if (fileUpload.length < 0) {
+            return new ModelAndView("redirect:/trust/profil/image/");
+        }
+
+        AccountTrust a = (AccountTrust) accountDao.findByUsername(getAccount().getUsername());
+
+        if (fileUpload != null && fileUpload.length > 0) {
+            for (CommonsMultipartFile aFile : fileUpload) {
+                if (!aFile.getOriginalFilename().equals("")) {
+                    String[] s = aFile.getOriginalFilename().split(Pattern.quote("."));
+                    aFile.transferTo(new File("E:/Users/Desktop/Projet/Syndico/src/main/webapp/resources/images/user/" + a.getId() + "." + s[1]));
+                    a.setImage("." + s[1]);
+                    accountDao.updateAccount(a);
+                }
+            }
+        }
+
+        return new ModelAndView("redirect:/trust/profil");
+    }
+    /**************************************************************************/
+    /***************************FIN DES PAGES PROFIL***************************/
+    /**************************************************************************/
+   
+    /**************************************************************************/
+    /************************DEBUT DES PAGES PROFIL SYNDIC*********************/
+    /**************************************************************************/
+    @RequestMapping(value = {"/trust/syndic/profil"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView syndicProfilPage(Trust newTrust, BindingResult result, HttpServletRequest request) {
+        AccountTrust account = getAccount();
+
+        if (request.getMethod() == "POST") {
+            TrustFormValidator fv = new TrustFormValidator();
+            fv.validate(newTrust, result);
+
+            if (result.hasErrors()) {
+                ModelAndView model = getMinModel(account, "syndic_profil");
+                model.addObject("errors", result);
+                model.addObject("newTrust", newTrust);
+                return model;
+            } else {
+                Trust t = trustDao.getByName(account.getTrust().getName());
+                t.setName(newTrust.getName());
+                t.setAddress(newTrust.getAddress());
+                t.setDescription(newTrust.getDescription());
+                t.setPhone(newTrust.getPhone());
+                t.setEmail(newTrust.getEmail());
+                t.setLegalInfomation(newTrust.getLegalInfomation());
+                t.setWebsite(newTrust.getWebsite());
+                t.setFax(newTrust.getFax());
+                
+                trustDao.updateTrust(t);
+                
+                return new ModelAndView("redirect:/trust/syndic/profil");
+            }
+        } else {
+            ModelAndView model = getMinModel(account, "syndic_profil");
+            model.addObject("newTrust", account.getTrust());
+            return model;
+        }
+    }
+
+            @RequestMapping(value = {"/trust/syndic/profil/image/"}, method = RequestMethod.GET)
+    public ModelAndView syndicprofilUpdateImageViewpage(HttpServletRequest request) {
+        AccountTrust account = getAccount();
+        ModelAndView model = getMinModel(account, "syndic_profil_image");
+        return model;
+    }
+
+    @RequestMapping(value = {"/trust/syndic/profil/image/upload"}, method = RequestMethod.POST)
+    public ModelAndView syndicprofilImageUpload(HttpServletRequest request, @RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
+        if (fileUpload.length < 0) {
+            return new ModelAndView("redirect:/trust/syndic/profil/image/");
+        }
+
+        AccountTrust a = (AccountTrust) accountDao.findByUsername(getAccount().getUsername());
+
+        if (fileUpload != null && fileUpload.length > 0) {
+            for (CommonsMultipartFile aFile : fileUpload) {
+                if (!aFile.getOriginalFilename().equals("")) {
+                    String[] s = aFile.getOriginalFilename().split(Pattern.quote("."));
+                    aFile.transferTo(new File("E:/Users/Desktop/Projet/Syndico/src/main/webapp/resources/images/trust/" + a.getId() + "." + s[1]));
+                    a.setImage("." + s[1]);
+                    accountDao.updateAccount(a);
+                }
+            }
+        }
+
+        return new ModelAndView("redirect:/trust/syndic/profil/");
+    }
+
+    /**************************************************************************/
+    /************************FIN DES PAGES PROFIL SYNDIC***********************/
+    /**************************************************************************/
+    
     @RequestMapping(value = {"/trust/news/add"}, method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView addNewsPage(News news, BindingResult result, HttpServletRequest request) {
         AccountTrust account = getAccount();
@@ -302,69 +490,6 @@ public class TrustController {
                 model.addObject("list", listCoOwnership);
                 model.addObject("news", news);
                 return model;
-        }
-    }
-    
-    @RequestMapping(value = {"/trust/profil"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView profilPage(Account faccount, BindingResult result, HttpServletRequest request) {
-        AccountTrust account = getAccount();
-
-        if (request.getMethod() == "POST") {
-            AccountFormValidator fv = new AccountFormValidator();
-            fv.validate(faccount, result);
-
-            if (result.hasErrors()) {
-                ModelAndView model = getMinModel(account, "profil");
-                model.addObject("errors", result);
-                model.addObject("faccount", faccount);
-                return model;
-            } else {
-                account.setEmail(faccount.getEmail());
-                account.setFirstName(faccount.getFirstName());
-                account.setLastName(faccount.getLastName());
-                accountDao.updateAccount(account);
-                
-                return new ModelAndView("redirect:/trust/profil");
-            }
-        } else {
-            ModelAndView model = getMinModel(account, "profil");
-            model.addObject("faccount", account);
-            return model;
-        }
-    }
-    
-    @RequestMapping(value = {"/trust/syndic/profil"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView syndicProfilPage(Trust newTrust, BindingResult result, HttpServletRequest request) {
-        AccountTrust account = getAccount();
-
-        if (request.getMethod() == "POST") {
-            TrustFormValidator fv = new TrustFormValidator();
-            fv.validate(newTrust, result);
-
-            if (result.hasErrors()) {
-                ModelAndView model = getMinModel(account, "profil_syndic");
-                model.addObject("errors", result);
-                model.addObject("newTrust", newTrust);
-                return model;
-            } else {
-                Trust t = trustDao.getByName(account.getTrust().getName());
-                t.setName(newTrust.getName());
-                t.setAddress(newTrust.getAddress());
-                t.setDescription(newTrust.getDescription());
-                t.setPhone(newTrust.getPhone());
-                t.setEmail(newTrust.getEmail());
-                t.setLegalInfomation(newTrust.getLegalInfomation());
-                t.setWebsite(newTrust.getWebsite());
-                t.setFax(newTrust.getFax());
-                
-                trustDao.updateTrust(t);
-                
-                return new ModelAndView("redirect:/trust");
-            }
-        } else {
-            ModelAndView model = getMinModel(account, "profil_syndic");
-            model.addObject("newTrust", account.getTrust());
-            return model;
         }
     }
     

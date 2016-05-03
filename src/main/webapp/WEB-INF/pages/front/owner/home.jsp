@@ -5,9 +5,6 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template_owner>
     <jsp:body>
-
-
-
         <div class="breadcrumbs-v1" style="background-image: url('${pageContext.request.contextPath}/resources/images/login/login_bg_2.jpg')">
             <div class="container">
                 <span><spring:message code="owner.welcome"/></span>
@@ -17,7 +14,6 @@
         <div class="container content-md">
             <c:forEach var="news" items="${coOwnership.news}">
 
-                <!-- News v3 -->
                 <div class="row margin-bottom-20">
                     <div class="col-sm-5 sm-margin-bottom-20">
                         <img class="img-responsive img-bordered" src="${pageContext.request.contextPath}/resources/images/news/${news.image}" alt="">
@@ -53,12 +49,12 @@
                                 <c:forEach var="comment" items="${news.comments}">
                                     <div class="row blog-comments margin-bottom-30">
                                         <div class="col-sm-2 sm-margin-bottom-40">
-                                            <img src="${pageContext.request.contextPath}/resources/images/user/avatar1.jpg" alt="">
+                                            <img src="${pageContext.request.contextPath}/resources/images/user/${comment.author.id}${comment.author.image}" alt="">
                                         </div>
                                         <div class="col-sm-10">
                                             <div class="comments-itself">
                                                 <h4>
-                                                    ${comment.author.username}
+                                                    ${comment.author.firstName} ${comment.author.lastName}
                                                     <span>${comment.creationDate}</span>
                                                 </h4>
                                                 <p>${comment.contents}</p>
@@ -69,7 +65,7 @@
                                 <div class="clearfix margin-bottom-20"><hr></div>
 
                                 <div class="row">
-                                    <form action="owner/add_comment" method="POST" class="sky-form">
+                                    <form action="owner/comment/add" method="POST" class="sky-form">
                                         <h3 class="col-md-offset-1"><spring:message code="owner.newComm"/></h3>
                                         <fieldset>
                                             <div class='row'>
@@ -92,16 +88,11 @@
                 </c:forEach>
 
 
-            <!-- Pager v3 -->
             <ul class="pager pager-v3 pager-md no-margin-bottom">
                 <li class="previous"><a href="#">&larr; <spring:message code="owner.previous"/></a></li>
                 <li class="next"><a href="#"><spring:message code="owner.next"/> &rarr;</a></li>
             </ul>
-            <!-- End Pager v3 -->
-        </div><!--/end container-->
-        <!--=== End Blog Posts ===-->
-
-
-
+            <p class="text-center"><a href="${pageContext.request.contextPath}/owner/news/add"><button class="btn-u">Ajouter</button></a></p>
+        </div>
     </jsp:body>
 </t:template_owner>

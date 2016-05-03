@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:template_manager>
-    <jsp:attribute name="title">${coOwnership.name}</jsp:attribute>
+    <jsp:attribute name="title">Assemblée générale</jsp:attribute>
 
     <jsp:attribute name="css">
         <link href="${pageContext.request.contextPath}/resources/theme_2/assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
@@ -60,7 +60,7 @@
                             <div class="panel-body">
                                 <span class="row">
                                     <a href="${pageContext.request.contextPath}/manager/meeting/add">
-                                        <button class="btn btn-success btn-outline pull-right"><i class="fa fa-plus"></i> Nouvelle assemblé générale</button>
+                                        <button class="btn btn-success btn-outline "><i class="fa fa-plus"></i> Nouvelle assemblé générale</button>
                                     </a>
                                 </span>
                                 <div class="table-responsive">
@@ -68,7 +68,6 @@
                                         <thead>
                                             <tr>
                                                 <th>Date</th>
-                                                <th>Statut</th>
                                                 <th>Description</th>
                                                 <th>Résolution</th>
                                                 <th>Option</th>
@@ -78,14 +77,17 @@
                                             <c:forEach var="meeting" items="${account.coOwnership.meetings}">
                                                 <tr class="gradeX">
                                                     <td>${meeting.meetingDate}</td>
-                                                    <td>FIN</td>
                                                     <td>${meeting.contents}</td>
                                                     <td>${fn:length(meeting.resolutions)}</td>
-
-                                                    <td>
+                                                    <td class="text-center">
                                                         <a href="${pageContext.request.contextPath}/manager/meeting/update/${meeting.id}"><i class="fa fa-edit"></i></a>
-                                                        <a href="${pageContext.request.contextPath}/manager/meeting/close/${meeting.id}"><i class="fa fa-close"></i></a>
-                                                        <a href=""><i class="fa fa-trash"></i></a>
+                                                        <c:if test="${meeting.report != null}">
+                                                            <a href="${pageContext.request.contextPath}/resources/ag/${meeting.id}${meeting.report}"><i class="fa fa-download"></i></a>
+                                                        </c:if>
+                                                        <c:if test="${meeting.report == null}">   
+                                                            <a href="${pageContext.request.contextPath}/manager/meeting/close/${meeting.id}"><i class="fa fa-close" style="color:  orange"></i></a>
+                                                        </c:if>
+                                                        <a href=""><i class="fa fa-trash" style="color: red"></i></a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -93,7 +95,6 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Date</th>
-                                                <th>Statut</th>
                                                 <th>Description</th>
                                                 <th>Résolution</th>
                                                 <th>Option</th>

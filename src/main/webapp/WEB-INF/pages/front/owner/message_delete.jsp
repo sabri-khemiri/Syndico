@@ -68,7 +68,7 @@
                         <table class="table table-hover table-mail">
                             <tbody>
                                 <c:forEach var="message" items="${account.messageReceived}">
-                                    <c:if test="${message.status != 'DELETE'}" >
+                                    <c:if test="${message.status == 'DELETE'}" >
                                         <tr class="${message.status == "NON_LU" ? "unread" : "read"}"/>
                                             <td class="check-mail">
                                                 <input type="checkbox" class="i-checks">
